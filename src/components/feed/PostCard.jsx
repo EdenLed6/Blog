@@ -59,7 +59,7 @@ const PostCard = memo(function PostCard({ post, expandReplies = false }) {
 
   return (
     <article
-      className="border-b border-border px-4 pt-4 pb-2 hover:bg-card-hover cursor-pointer relative group"
+      className="border-b border-border px-3 sm:px-4 pt-3 sm:pt-4 pb-2 hover:bg-card-hover cursor-pointer relative group"
       onClick={handleCardClick}
     >
       {/* Gradient left accent on hover */}
