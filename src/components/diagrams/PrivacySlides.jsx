@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const slides = [
   {
@@ -65,32 +65,45 @@ const slides = [
 
 export default function PrivacySlides() {
   const [current, setCurrent] = useState(0);
+  const touchX = useRef(null);
   const prev = () => setCurrent((c) => (c - 1 + slides.length) % slides.length);
   const next = () => setCurrent((c) => (c + 1) % slides.length);
   const s = slides[current];
 
+  const onTouchStart = (e) => { touchX.current = e.touches[0].clientX; };
+  const onTouchEnd = (e) => {
+    if (touchX.current === null) return;
+    const delta = touchX.current - e.changedTouches[0].clientX;
+    if (Math.abs(delta) > 50) delta > 0 ? next() : prev();
+    touchX.current = null;
+  };
+
   return (
     <div className="rounded-xl overflow-hidden border border-border bg-card p-3 sm:p-4 mt-3">
       <div className="flex items-center justify-between mb-3">
-        <p className="text-xs text-slate-500 uppercase tracking-wide font-medium">
+        <p className="text-xs sm:text-sm text-slate-500 uppercase tracking-wide font-medium">
           Privacy Risks — Humanoid Robots
         </p>
-        <span className="text-xs text-slate-600">{current + 1} / {slides.length}</span>
+        <span className="text-xs sm:text-sm text-slate-600">{current + 1} / {slides.length}</span>
       </div>
 
-      <div className={`rounded-lg border ${s.color} p-3 sm:p-4 transition-all`}>
+      <div
+        className={`rounded-lg border ${s.color} p-4 sm:p-5 transition-all select-none`}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xl flex-shrink-0">{s.icon}</span>
-          <h3 className="text-sm font-bold text-white leading-tight">{s.title}</h3>
+          <span className="text-2xl flex-shrink-0">{s.icon}</span>
+          <h3 className="text-base sm:text-lg font-bold text-white leading-tight">{s.title}</h3>
         </div>
-        <ul className="space-y-2 mb-3">
+        <ul className="space-y-2.5 mb-4">
           {s.points.map((p, i) => (
-            <li key={i} className="flex items-start gap-2 text-xs text-slate-300 leading-snug">
+            <li key={i} className="flex items-start gap-2 text-sm text-slate-300 leading-snug">
               <span className="text-slate-500 mt-0.5 flex-shrink-0">•</span>{p}
             </li>
           ))}
         </ul>
-        <p className="text-xs text-slate-400 italic border-t border-white/10 pt-2 leading-snug">{s.verdict}</p>
+        <p className="text-sm text-slate-400 italic border-t border-white/10 pt-3 leading-snug">{s.verdict}</p>
       </div>
 
       <div className="flex items-center justify-between mt-3">
