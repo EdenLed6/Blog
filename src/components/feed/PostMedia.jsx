@@ -6,6 +6,8 @@ const DIAGRAMS = {
   DataFlow: lazy(() => import("../diagrams/DataFlow.jsx")),
   GovernanceModel: lazy(() => import("../diagrams/GovernanceModel.jsx")),
   HelixVLA: lazy(() => import("../diagrams/HelixVLA.jsx")),
+  RiskMatrix: lazy(() => import("../diagrams/RiskMatrix.jsx")),
+  Timeline: lazy(() => import("../diagrams/Timeline.jsx")),
 };
 
 export default function PostMedia({ media }) {
