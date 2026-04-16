@@ -70,7 +70,7 @@ export default function RegulationSlides() {
   const s = slides[current];
 
   return (
-    <div className="rounded-xl overflow-hidden border border-border bg-card p-4 mt-3">
+    <div className="rounded-xl overflow-hidden border border-border bg-card p-3 sm:p-4 mt-3">
       <div className="flex items-center justify-between mb-3">
         <p className="text-xs text-slate-500 uppercase tracking-wide font-medium">
           Regulatory Landscape — AI &amp; Humanoid Robots
@@ -78,32 +78,32 @@ export default function RegulationSlides() {
         <span className="text-xs text-slate-600">{current + 1} / {slides.length}</span>
       </div>
 
-      <div className={`rounded-lg border ${s.color} p-4 min-h-[160px] transition-all`}>
+      <div className={`rounded-lg border ${s.color} p-3 sm:p-4 transition-all`}>
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-xl">{s.icon}</span>
-          <h3 className="text-sm font-bold text-white">{s.title}</h3>
+          <span className="text-xl flex-shrink-0">{s.icon}</span>
+          <h3 className="text-sm font-bold text-white leading-tight">{s.title}</h3>
         </div>
-        <ul className="space-y-1.5 mb-3">
+        <ul className="space-y-2 mb-3">
           {s.points.map((p, i) => (
-            <li key={i} className="flex items-start gap-2 text-xs text-slate-300">
-              <span className="text-slate-500 mt-0.5">•</span>{p}
+            <li key={i} className="flex items-start gap-2 text-xs text-slate-300 leading-snug">
+              <span className="text-slate-500 mt-0.5 flex-shrink-0">•</span>{p}
             </li>
           ))}
         </ul>
-        <p className="text-xs text-slate-400 italic border-t border-white/10 pt-2">{s.verdict}</p>
+        <p className="text-xs text-slate-400 italic border-t border-white/10 pt-2 leading-snug">{s.verdict}</p>
       </div>
 
       <div className="flex items-center justify-between mt-3">
-        <button onClick={prev} className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition-colors">
+        <button onClick={prev} className="px-4 py-2.5 min-h-[44px] rounded-lg bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 text-sm font-medium transition-colors touch-manipulation">
           ← Prev
         </button>
-        <div className="flex gap-1.5">
+        <div className="flex gap-2 items-center">
           {slides.map((_, i) => (
-            <button key={i} onClick={() => setCurrent(i)}
-              className={`w-2 h-2 rounded-full transition-colors ${i === current ? "bg-indigo-400" : "bg-slate-700"}`} />
+            <button key={i} onClick={() => setCurrent(i)} aria-label={`Slide ${i + 1}`}
+              className={`w-2.5 h-2.5 rounded-full transition-colors touch-manipulation ${i === current ? "bg-indigo-400" : "bg-slate-700"}`} />
           ))}
         </div>
-        <button onClick={next} className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition-colors">
+        <button onClick={next} className="px-4 py-2.5 min-h-[44px] rounded-lg bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 text-sm font-medium transition-colors touch-manipulation">
           Next →
         </button>
       </div>
