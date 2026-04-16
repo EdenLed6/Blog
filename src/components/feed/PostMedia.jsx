@@ -8,6 +8,9 @@ const DIAGRAMS = {
   HelixVLA: lazy(() => import("../diagrams/HelixVLA.jsx")),
   RiskMatrix: lazy(() => import("../diagrams/RiskMatrix.jsx")),
   Timeline: lazy(() => import("../diagrams/Timeline.jsx")),
+  LegalSlides: lazy(() => import("../diagrams/LegalSlides.jsx")),
+  PrivacySlides: lazy(() => import("../diagrams/PrivacySlides.jsx")),
+  RegulationSlides: lazy(() => import("../diagrams/RegulationSlides.jsx")),
 };
 
 export default function PostMedia({ media }) {

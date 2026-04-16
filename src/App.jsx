@@ -1,14 +1,26 @@
-import { HashRouter as BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter as BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AppProvider } from "./context/AppContext.jsx";
 import AppShell from "./components/layout/AppShell.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import TopicPage from "./pages/TopicPage.jsx";
 import PostDetailPage from "./pages/PostDetailPage.jsx";
+import { useEffect } from "react";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    const feed = document.getElementById("feed-scroll");
+    if (feed) feed.scrollTop = 0;
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 export default function App() {
   return (
     <AppProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<AppShell />}>
             <Route index element={<HomePage />} />
