@@ -270,7 +270,7 @@ export const SEED_POSTS = [
     authorId: "u1",
     topic: "Legal",
     body: "Critical gap @oriblum and I identified: product liability law and data protection law don't talk to each other. A robot that misuses biometric data might violate neither — because neither statute was drafted with this use case in mind.",
-    media: [{ type: "embed", platform: "youtube", videoId: "s0dMTAQM4cw" }],
+    media: [{ type: "embed", platform: "youtube", videoId: "Nc7hnPpbhyI" }],
     tags: ["oriblum"],
     likes: ["u2", "u3", "u4"],
     reposts: ["u3", "u4"],
