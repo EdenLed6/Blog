@@ -393,7 +393,7 @@ export const SEED_POSTS = [
     authorId: "u1",
     topic: "Ethics",
     body: "Informed consent for ambient robotics is a design problem, not just a legal one. How do you consent to a system that updates in real time, shares inferences upstream, operates in spaces you didn't choose, and keeps collecting after you leave?",
-    media: [{ type: "image", url: "/Blog/images/p18.png", alt: "Worker and humanoid robot in warehouse corridor" }],
+    media: [{ type: "embed", platform: "youtube", videoId: "DH8wCgwL_1U" }],
     tags: [],
     likes: ["u2", "u3", "u4"],
     reposts: ["u2", "u4"],
