@@ -66,7 +66,7 @@ export default function GovernanceModel() {
                   <span className="text-xs text-slate-400">— {t.subtitle}</span>
                   <span className="text-xs bg-white/10 text-slate-400 px-1.5 py-0.5 rounded-full ml-auto">{t.timing}</span>
                 </div>
-                <p className="text-xs text-slate-400 mt-1">{t.desc}</p>
+                <p className="text-sm text-slate-400 mt-1">{t.desc}</p>
               </div>
             </div>
           </div>

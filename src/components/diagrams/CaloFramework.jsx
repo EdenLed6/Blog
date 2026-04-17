@@ -39,7 +39,7 @@ export default function CaloFramework() {
               </span>
               <span className={`text-sm font-semibold ${item.textColor}`}>{item.title}</span>
             </div>
-            <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
+            <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
           </div>
         ))}
       </div>
