@@ -8,12 +8,61 @@ const TEAM = [
 ];
 
 const REFS = [
-  { short: "Calo (2010)", full: "Calo, R. Robots and Privacy. MIT Press." },
-  { short: "Figure AI (2026)", full: "Figure AI. Helix 02 — Product documentation." },
-  { short: "EU AI Act (2024)", full: "European Parliament. Regulation on Artificial Intelligence." },
-  { short: "GDPR Art. 25", full: "General Data Protection Regulation, Article 25 — Privacy by Design." },
-  { short: "NIST AI RMF", full: "NIST AI Risk Management Framework (2023)." },
-  { short: "Illinois BIPA", full: "Biometric Information Privacy Act, 740 ILCS 14." },
+  {
+    short: "Calo (2010)",
+    full: "M. Ryan Calo. Robots and Privacy. In Robot Ethics: The Ethical and Social Implications of Robotics. MIT Press, 2012.",
+    url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1599189",
+  },
+  {
+    short: "Figure AI — Helix 02",
+    full: "Figure AI. Introducing Helix 02: Full-Body Autonomy. figure.ai, January 2026.",
+    url: "https://www.figure.ai/news/helix-02",
+  },
+  {
+    short: "EU AI Act (2024)",
+    full: "Regulation (EU) 2024/1689 of the European Parliament and of the Council, 13 June 2024.",
+    url: "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+  },
+  {
+    short: "GDPR Art. 25",
+    full: "Regulation (EU) 2016/679. Article 25: Data Protection by Design and by Default.",
+    url: "https://gdpr-info.eu/art-25-gdpr/",
+  },
+  {
+    short: "NIST AI RMF (2023)",
+    full: "NIST AI 100-1. Artificial Intelligence Risk Management Framework (AI RMF 1.0). National Institute of Standards and Technology, January 2023.",
+    url: "https://www.nist.gov/itl/ai-risk-management-framework",
+  },
+  {
+    short: "Illinois BIPA",
+    full: "Biometric Information Privacy Act. 740 ILCS 14. Illinois General Assembly, enacted 2008.",
+    url: "https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=3004",
+  },
+  {
+    short: "ACM Code of Ethics",
+    full: "Association for Computing Machinery. ACM Code of Ethics and Professional Conduct. ACM, 2018.",
+    url: "https://www.acm.org/code-of-ethics",
+  },
+  {
+    short: "FTC Act, Section 5",
+    full: "Federal Trade Commission Act, Section 5: Unfair or Deceptive Acts or Practices. 15 U.S.C. § 45.",
+    url: "https://www.ftc.gov/section-5",
+  },
+  {
+    short: "CCPA",
+    full: "California Consumer Privacy Act of 2018. Cal. Civ. Code § 1798.100 et seq., as amended by CPRA.",
+    url: "https://oag.ca.gov/privacy/ccpa",
+  },
+  {
+    short: "Darling — HRI Research",
+    full: "Kate Darling. Research Scientist, MIT Media Lab. Human-Robot Interaction and Social Robotics.",
+    url: "https://www.media.mit.edu/people/kdarling/overview/",
+  },
+  {
+    short: "Breazeal — MIT Robotics",
+    full: "Cynthia Breazeal. Professor of Media Arts and Sciences, MIT Media Lab. Founder, Personal Robots Group.",
+    url: "https://www.media.mit.edu/people/cynthiab/overview/",
+  },
 ];
 
 export default function AboutPage() {
@@ -106,10 +155,21 @@ export default function AboutPage() {
           <BookOpen size={16} className="text-amber-400" />
           <h2 className="text-white font-semibold text-base">Key references</h2>
         </div>
-        <ul className="space-y-2">
-          {REFS.map(({ short, full }) => (
-            <li key={short} className="text-xs text-slate-400 leading-relaxed">
-              <span className="text-slate-300 font-medium">{short}</span> — {full}
+        <ul className="space-y-3">
+          {REFS.map(({ short, full, url }) => (
+            <li key={short}>
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-2 rounded-xl p-2.5 hover:bg-white/5 transition-colors"
+              >
+                <ExternalLink size={13} className="text-slate-600 group-hover:text-accent-blue mt-0.5 flex-shrink-0 transition-colors" />
+                <div>
+                  <p className="text-sm text-slate-200 font-medium group-hover:text-accent-blue transition-colors">{short}</p>
+                  <p className="text-xs text-slate-500 leading-relaxed mt-0.5">{full}</p>
+                </div>
+              </a>
             </li>
           ))}
         </ul>
