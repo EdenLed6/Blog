@@ -57,14 +57,14 @@ export default function GovernanceModel() {
           <div key={t.tier} className={`rounded-lg border ${t.border} bg-gradient-to-r ${t.color} p-3`}>
             <div className="flex items-start gap-3">
               <div className={`w-14 flex-shrink-0 ${t.badge} rounded-md px-1.5 py-0.5 text-center`}>
-                <p className="text-[9px] text-white/70 font-medium">{t.tier}</p>
+                <p className="text-xs text-white/70 font-medium">{t.tier}</p>
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="text-sm">{t.icon}</span>
                   <span className="text-sm font-semibold text-white">{t.title}</span>
                   <span className="text-xs text-slate-400">— {t.subtitle}</span>
-                  <span className="text-[10px] bg-white/10 text-slate-400 px-1.5 py-0.5 rounded-full ml-auto">{t.timing}</span>
+                  <span className="text-xs bg-white/10 text-slate-400 px-1.5 py-0.5 rounded-full ml-auto">{t.timing}</span>
                 </div>
                 <p className="text-xs text-slate-400 mt-1">{t.desc}</p>
               </div>

@@ -28,7 +28,7 @@ export default function Timeline() {
       {/* Legend */}
       <div className="flex flex-wrap gap-2 mb-4">
         {[["law","Legislation"],["policy","Policy"],["industry","Industry"],["milestone","Milestone"]].map(([type, label]) => (
-          <span key={type} className={`text-[10px] px-2 py-0.5 rounded-full border ${typeStyle[type].badge}`}>{label}</span>
+          <span key={type} className={`text-xs px-2 py-0.5 rounded-full border ${typeStyle[type].badge}`}>{label}</span>
         ))}
       </div>
 
@@ -43,9 +43,9 @@ export default function Timeline() {
                 <div className="flex flex-col items-center w-28">
                   {/* Card */}
                   <div className={`rounded-lg border ${s.badge.split(" ").filter(c => c.startsWith("border")).join(" ")} bg-slate-800/60 p-2 w-full mb-2`}>
-                    <p className={`text-[11px] font-bold ${s.label}`}>{ev.year}</p>
-                    <p className="text-[10px] text-white font-medium leading-tight mt-0.5">{ev.title}</p>
-                    <p className="text-[9px] text-slate-400 mt-1 leading-tight">{ev.desc}</p>
+                    <p className={`text-sm font-bold ${s.label}`}>{ev.year}</p>
+                    <p className="text-xs text-white font-medium leading-tight mt-0.5">{ev.title}</p>
+                    <p className="text-xs text-slate-400 mt-1 leading-tight">{ev.desc}</p>
                   </div>
                   {/* Dot */}
                   <div className={`w-3 h-3 rounded-full ${s.dot} border-2 border-slate-900 z-10 flex-shrink-0`} />
