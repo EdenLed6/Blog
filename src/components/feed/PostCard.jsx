@@ -9,81 +9,94 @@ import { useApp } from "../../context/AppContext.jsx";
 import { formatTimestamp } from "../../utils/helpers.js";
 
 function parseBody(body, userMap) {
-  // Split on @mentions and #hashtags
   const parts = body.split(/(@\w+|#\w+)/g);
   return parts.map((part, i) => {
     if (part.startsWith("@")) {
       const handle = part.slice(1);
       const mentioned = Object.values(userMap).find((u) => u.handle === handle);
       return (
-        <span
-          key={i}
-          className="text-accent-blue hover:underline cursor-pointer"
-          title={mentioned ? mentioned.name : handle}
-        >
+        <span key={i} className="text-accent-blue hover:underline cursor-pointer" title={mentioned ? mentioned.name : handle}>
           {part}
         </span>
       );
     }
     if (part.startsWith("#")) {
-      return (
-        <span key={i} className="text-accent-indigo hover:underline cursor-pointer">
-          {part}
-        </span>
-      );
+      return <span key={i} className="text-accent-indigo hover:underline cursor-pointer">{part}</span>;
     }
-    // Preserve newlines
     return part.split("\n").map((line, j, arr) => (
-      <span key={`${i}-${j}`}>
-        {line}
-        {j < arr.length - 1 && <br />}
-      </span>
+      <span key={`${i}-${j}`}>{line}{j < arr.length - 1 && <br />}</span>
     ));
   });
 }
+
+const TRUNCATE = 220;
 
 const PostCard = memo(function PostCard({ post, expandReplies = false }) {
   const { userMap } = useApp();
   const navigate = useNavigate();
   const [repliesOpen, setRepliesOpen] = useState(expandReplies);
   const [replyComposerOpen, setReplyComposerOpen] = useState(false);
+  const [bodyExpanded, setBodyExpanded] = useState(false);
 
   const author = userMap[post.authorId];
   if (!author) return null;
 
+  const isLong = post.body.length > TRUNCATE;
+
   const handleCardClick = (e) => {
-    // Don't navigate if clicking a link, button, or interactive element
     if (e.target.closest("a, button, iframe, video")) return;
     navigate(`/post/${post.id}`);
   };
 
   return (
     <article
-      className="border-b border-border px-3 sm:px-4 pt-3 sm:pt-4 pb-2 hover:bg-card-hover cursor-pointer relative group"
+      className="border-b border-border px-3 sm:px-4 pt-4 pb-1 hover:bg-card-hover cursor-pointer relative group"
       onClick={handleCardClick}
     >
-      {/* Gradient left accent on hover */}
+      {/* Left accent on hover */}
       <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent-blue to-accent-purple opacity-0 group-hover:opacity-100 transition-opacity" />
 
       <div className="flex gap-3">
-        {/* Avatar */}
         <div className="flex-shrink-0">
           <Avatar user={author} size="md" />
         </div>
 
         <div className="flex-1 min-w-0">
           {/* Author + meta */}
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="font-semibold text-white text-sm">{author.name}</span>
+          <div className="flex items-center gap-1.5 flex-wrap">
+            <span className="font-bold text-white text-sm">{author.name}</span>
             <span className="text-slate-500 text-sm">@{author.handle}</span>
-            <span className="text-slate-600 text-xs">·</span>
+            <span className="text-slate-700 text-xs">·</span>
             <span className="text-slate-500 text-xs">{formatTimestamp(post.createdAt)}</span>
             <TopicBadge topic={post.topic} size="xs" />
           </div>
 
-          {/* Body */}
-          <div className="mt-1.5 text-slate-200 text-sm leading-relaxed">
-            {parseBody(post.body, userMap)}
+          {/* Body — LinkedIn-style "See more" truncation */}
+          <div className="mt-2 text-slate-200 text-sm leading-relaxed">
+            {isLong && !bodyExpanded ? (
+              <>
+                {parseBody(post.body.slice(0, TRUNCATE), userMap)}
+                <span className="text-slate-600">… </span>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setBodyExpanded(true); }}
+                  className="text-accent-blue hover:underline text-sm font-medium"
+                >
+                  See more
+                </button>
+              </>
+            ) : (
+              <>
+                {parseBody(post.body, userMap)}
+                {isLong && (
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setBodyExpanded(false); }}
+                    className="block mt-1 text-accent-blue hover:underline text-sm font-medium"
+                  >
+                    See less
+                  </button>
+                )}
+              </>
+            )}
           </div>
 
           {/* Media */}
@@ -92,10 +105,7 @@ const PostCard = memo(function PostCard({ post, expandReplies = false }) {
           {/* Actions */}
           <PostActions
             post={post}
-            onReplyClick={(e) => {
-              setRepliesOpen(true);
-              setReplyComposerOpen(true);
-            }}
+            onReplyClick={() => { setRepliesOpen(true); setReplyComposerOpen(true); }}
           />
 
           {/* Reply Thread */}
@@ -113,26 +123,16 @@ const PostCard = memo(function PostCard({ post, expandReplies = false }) {
           {/* Collapsed replies toggle */}
           {!repliesOpen && post.replyIds.length > 0 && (
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setRepliesOpen(true);
-                setReplyComposerOpen(false);
-              }}
-              className="mt-1.5 text-xs text-accent-blue hover:underline"
+              onClick={(e) => { e.stopPropagation(); setRepliesOpen(true); setReplyComposerOpen(false); }}
+              className="mb-2 text-sm text-accent-blue hover:underline font-medium"
             >
               {post.replyIds.length} {post.replyIds.length === 1 ? "reply" : "replies"}
             </button>
           )}
 
-          {/* Open reply composer if no existing replies */}
           {replyComposerOpen && post.replyIds.length === 0 && (
             <div className="mt-2" onClick={(e) => e.stopPropagation()}>
-              <ReplyThread
-                replyIds={[]}
-                postId={post.id}
-                showComposer
-                onComposerClose={() => setReplyComposerOpen(false)}
-              />
+              <ReplyThread replyIds={[]} postId={post.id} showComposer onComposerClose={() => setReplyComposerOpen(false)} />
             </div>
           )}
         </div>

@@ -19,13 +19,13 @@ export default function BottomNav() {
           to={to}
           end={end}
           className={({ isActive }) =>
-            `flex-1 flex flex-col items-center justify-center py-2 gap-0.5 text-xs transition-colors ${
+            `flex-1 flex flex-col items-center justify-center py-3 gap-1 transition-colors touch-manipulation ${
               isActive ? "text-accent-blue" : "text-slate-500"
             }`
           }
         >
-          <Icon size={20} />
-          <span className="text-[10px]">{label}</span>
+          <Icon size={22} />
+          <span className="text-xs font-medium">{label}</span>
         </NavLink>
       ))}
     </nav>

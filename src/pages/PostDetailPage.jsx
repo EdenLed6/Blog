@@ -64,9 +64,9 @@ export default function PostDetailPage() {
       <div className="sticky top-0 z-20 bg-background/90 backdrop-blur border-b border-border px-4 py-3 flex items-center gap-3">
         <Link
           to="/"
-          className="p-1.5 rounded-full hover:bg-white/10 text-slate-400 hover:text-white"
+          className="w-11 h-11 rounded-full hover:bg-white/10 active:bg-white/20 text-slate-400 hover:text-white flex items-center justify-center touch-manipulation"
         >
-          <ArrowLeft size={18} />
+          <ArrowLeft size={22} />
         </Link>
         <h1 className="font-bold text-white text-base">Post</h1>
       </div>

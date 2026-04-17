@@ -5,7 +5,6 @@ const slides = [
     title: "No Federal Framework",
     icon: "🇺🇸",
     color: "border-red-700 bg-red-900/20",
-    badge: "bg-red-700",
     points: [
       "FTC Act §5 — covers \"unfair\" practices, reactive only",
       "BIPA — Illinois only, biometric data",
@@ -18,7 +17,6 @@ const slides = [
     title: "Illinois BIPA Exposure",
     icon: "⚖️",
     color: "border-orange-700 bg-orange-900/20",
-    badge: "bg-orange-700",
     points: [
       "$1,000 per negligent violation",
       "$5,000 per intentional violation",
@@ -31,7 +29,6 @@ const slides = [
     title: "GDPR vs NIST",
     icon: "🌍",
     color: "border-blue-700 bg-blue-900/20",
-    badge: "bg-blue-700",
     points: [
       "EU: Privacy by Design is legally mandatory (Art. 25)",
       "EU: DPA pre-approval required for high-risk AI",
@@ -44,7 +41,6 @@ const slides = [
     title: "Product vs Data Law Gap",
     icon: "🕳️",
     color: "border-purple-700 bg-purple-900/20",
-    badge: "bg-purple-700",
     points: [
       "Product liability: designed for physical defects",
       "Data protection: designed for digital processing",
@@ -57,10 +53,9 @@ const slides = [
     title: "Training Data Gap",
     icon: "🤖",
     color: "border-emerald-700 bg-emerald-900/20",
-    badge: "bg-emerald-700",
     points: [
       "No law specifically governs AI training data collection",
-      "Functional data (real-time use) vs training data (retained) not legally distinguished",
+      "Functional vs training data not legally distinguished",
       "Current law treats it all as product telemetry",
       "Our proposal: mandatory DPIA + consent for training-purpose retention",
     ],
@@ -90,14 +85,25 @@ export default function LegalSlides() {
       onTouchEnd={onTouchEnd}
       style={{ touchAction: "pan-y" }}
     >
-      <div className="flex items-center justify-between mb-3">
-        <p className="text-xs sm:text-sm text-slate-500 uppercase tracking-wide font-medium">
-          Key Legal Challenges — Humanoid Robots
-        </p>
-        <span className="text-xs sm:text-sm text-slate-600">{current + 1} / {slides.length}</span>
+      {/* Label */}
+      <p className="text-xs text-slate-500 uppercase tracking-wide font-medium mb-2">
+        Key Legal Challenges — Humanoid Robots
+      </p>
+
+      {/* Instagram-style progress bar */}
+      <div className="flex gap-1 mb-3">
+        {slides.map((_, i) => (
+          <button key={i} onClick={() => setCurrent(i)} aria-label={`Slide ${i + 1}`}
+            className="flex-1 h-1 rounded-full bg-slate-700/60 overflow-hidden touch-manipulation">
+            <div className={`h-full rounded-full transition-all duration-300 ${
+              i < current ? "bg-white/50 w-full" : i === current ? "bg-white w-full" : "w-0"
+            }`} />
+          </button>
+        ))}
       </div>
 
-      <div className={`rounded-lg border ${s.color} p-4 sm:p-5 transition-all select-none`}>
+      {/* Slide content with animation */}
+      <div key={current} className={`rounded-lg border ${s.color} p-4 sm:p-5 select-none slide-animate`}>
         <div className="flex items-center gap-2 mb-3">
           <span className="text-2xl flex-shrink-0">{s.icon}</span>
           <h3 className="text-base sm:text-lg font-bold text-white leading-tight">{s.title}</h3>
@@ -112,18 +118,16 @@ export default function LegalSlides() {
         <p className="text-sm text-slate-400 italic border-t border-white/10 pt-3 leading-snug">{s.verdict}</p>
       </div>
 
+      {/* Arrow nav */}
       <div className="flex items-center justify-between mt-3">
-        <button onClick={prev} className="px-4 py-2.5 min-h-[44px] rounded-lg bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 text-sm font-medium transition-colors touch-manipulation">
-          ← Prev
+        <button onClick={prev}
+          className="w-11 h-11 rounded-full bg-white/8 hover:bg-white/15 active:bg-white/25 flex items-center justify-center text-white text-xl transition-colors touch-manipulation">
+          ‹
         </button>
-        <div className="flex gap-2 items-center">
-          {slides.map((_, i) => (
-            <button key={i} onClick={() => setCurrent(i)} aria-label={`Slide ${i + 1}`}
-              className={`w-2.5 h-2.5 rounded-full transition-colors touch-manipulation ${i === current ? "bg-blue-400" : "bg-slate-700"}`} />
-          ))}
-        </div>
-        <button onClick={next} className="px-4 py-2.5 min-h-[44px] rounded-lg bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 text-sm font-medium transition-colors touch-manipulation">
-          Next →
+        <span className="text-xs text-slate-500">{current + 1} / {slides.length}</span>
+        <button onClick={next}
+          className="w-11 h-11 rounded-full bg-white/8 hover:bg-white/15 active:bg-white/25 flex items-center justify-center text-white text-xl transition-colors touch-manipulation">
+          ›
         </button>
       </div>
     </div>

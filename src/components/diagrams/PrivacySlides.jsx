@@ -85,14 +85,22 @@ export default function PrivacySlides() {
       onTouchEnd={onTouchEnd}
       style={{ touchAction: "pan-y" }}
     >
-      <div className="flex items-center justify-between mb-3">
-        <p className="text-xs sm:text-sm text-slate-500 uppercase tracking-wide font-medium">
-          Privacy Risks — Humanoid Robots
-        </p>
-        <span className="text-xs sm:text-sm text-slate-600">{current + 1} / {slides.length}</span>
+      <p className="text-xs text-slate-500 uppercase tracking-wide font-medium mb-2">
+        Privacy Risks — Humanoid Robots
+      </p>
+
+      <div className="flex gap-1 mb-3">
+        {slides.map((_, i) => (
+          <button key={i} onClick={() => setCurrent(i)} aria-label={`Slide ${i + 1}`}
+            className="flex-1 h-1 rounded-full bg-slate-700/60 overflow-hidden touch-manipulation">
+            <div className={`h-full rounded-full transition-all duration-300 ${
+              i < current ? "bg-white/50 w-full" : i === current ? "bg-white w-full" : "w-0"
+            }`} />
+          </button>
+        ))}
       </div>
 
-      <div className={`rounded-lg border ${s.color} p-4 sm:p-5 transition-all select-none`}>
+      <div key={current} className={`rounded-lg border ${s.color} p-4 sm:p-5 select-none slide-animate`}>
         <div className="flex items-center gap-2 mb-3">
           <span className="text-2xl flex-shrink-0">{s.icon}</span>
           <h3 className="text-base sm:text-lg font-bold text-white leading-tight">{s.title}</h3>
@@ -108,17 +116,14 @@ export default function PrivacySlides() {
       </div>
 
       <div className="flex items-center justify-between mt-3">
-        <button onClick={prev} className="px-4 py-2.5 min-h-[44px] rounded-lg bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 text-sm font-medium transition-colors touch-manipulation">
-          ← Prev
+        <button onClick={prev}
+          className="w-11 h-11 rounded-full bg-white/8 hover:bg-white/15 active:bg-white/25 flex items-center justify-center text-white text-xl transition-colors touch-manipulation">
+          ‹
         </button>
-        <div className="flex gap-2 items-center">
-          {slides.map((_, i) => (
-            <button key={i} onClick={() => setCurrent(i)} aria-label={`Slide ${i + 1}`}
-              className={`w-2.5 h-2.5 rounded-full transition-colors touch-manipulation ${i === current ? "bg-purple-400" : "bg-slate-700"}`} />
-          ))}
-        </div>
-        <button onClick={next} className="px-4 py-2.5 min-h-[44px] rounded-lg bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-300 text-sm font-medium transition-colors touch-manipulation">
-          Next →
+        <span className="text-xs text-slate-500">{current + 1} / {slides.length}</span>
+        <button onClick={next}
+          className="w-11 h-11 rounded-full bg-white/8 hover:bg-white/15 active:bg-white/25 flex items-center justify-center text-white text-xl transition-colors touch-manipulation">
+          ›
         </button>
       </div>
     </div>
