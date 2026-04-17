@@ -17,6 +17,10 @@
   background: #2e3d55;
 }
 
+html {
+  font-size: 17px;
+}
+
 html,
 body,
 #root {
