@@ -4,12 +4,12 @@ const h = 60 * m;
 const d = 24 * h;
 
 export const SEED_REPLIES = [
-  // ── p1 thread: How does Helix actually collect data? ───────────────────────
+  // ── p1 thread ─────────────────────────────────────────────────────────────
   {
     id: "r1",
     postId: "p1",
     authorId: "u1",
-    body: "Step 1: RGB cameras + depth sensors map everyone in the room at ~20 fps. Even bystanders not interacting with the robot are in every frame.",
+    body: "Step 1: RGB cameras and depth sensors build a live 3D map of the entire workspace, ~20 times a second. Every person in range — whether they're interacting with the robot or just walking past — is in every single frame.",
     likes: ["u3", "u4"],
     createdAt: now - 3.5 * h,
   },
@@ -17,7 +17,7 @@ export const SEED_REPLIES = [
     id: "r2",
     postId: "p1",
     authorId: "u2",
-    body: "Step 2: The VLA model fuses vision + audio + proprioception into a single latent representation. Faces, gait, voices — all encoded together in the same embedding.",
+    body: "Step 2: vision, audio, and physical sensor data all get compressed into one AI representation. Faces, the way you walk, your voice — encoded together. Not as separate data points. As one unified model of you.",
     likes: ["u1", "u4", "u5"],
     createdAt: now - 3 * h,
   },
@@ -25,27 +25,27 @@ export const SEED_REPLIES = [
     id: "r3",
     postId: "p1",
     authorId: "u4",
-    body: "Step 3: Some of that goes to the action head (functional, should delete immediately). Some goes to gradient descent for model updates (training — needs consent). Helix doesn't separate them.",
+    body: "Step 3: some of that goes to the action controller — what Helix does next (functional, should be discarded immediately). Some feeds back into model training — making future versions smarter (needs consent). Helix doesn't separate them. That's the entire problem.",
     likes: ["u1", "u2", "u3"],
     createdAt: now - 2.5 * h,
   },
 
-  // ── p7 thread: US patchwork ────────────────────────────────────────────────
+  // ── p7 thread ─────────────────────────────────────────────────────────────
   {
     id: "r4",
     postId: "p7",
     authorId: "u1",
-    body: "Worth adding: federal preemption uncertainty makes this worse. A federal robotics privacy bill could override stronger state laws like BIPA. Industry knows and is lobbying for exactly that outcome.",
+    body: "Worth knowing: industry is already lobbying for federal preemption. A weak federal law could override stronger state laws like BIPA. They know the exposure. They're playing offense.",
     likes: ["u2", "u4"],
     createdAt: now - 2 * h,
   },
 
-  // ── p11 thread: GDPR legitimate interests ─────────────────────────────────
+  // ── p11 thread ────────────────────────────────────────────────────────────
   {
     id: "r5",
     postId: "p11",
     authorId: "u2",
-    body: "Short answer: no, not for training data. Art. 6(1)(f) requires a balancing test — controller interests vs. data subject rights. Workers who can't opt out of a workplace robot fail this test almost automatically.",
+    body: "Short answer: no. Article 6(1)(f) requires balancing the controller's interests against the data subject's rights. Workers who have no meaningful choice fail that test automatically.",
     likes: ["u1", "u4", "u5"],
     createdAt: now - 2.5 * d,
   },
@@ -53,17 +53,17 @@ export const SEED_REPLIES = [
     id: "r6",
     postId: "p11",
     authorId: "u3",
-    body: "Even before legitimate interests, Art. 9 special category kicks in. Biometric data for ID purposes = automatic highest-tier consent requirement. Legitimate interests can't override Art. 9.",
+    body: "And before you even get to legitimate interests — biometric data used for identification triggers Article 9 special category protections. 'Legitimate interests' can't override Article 9. You need explicit consent. End of argument.",
     likes: ["u2", "u4"],
     createdAt: now - 2 * d,
   },
 
-  // ── p14 thread: ELI5 humanoid vs camera ───────────────────────────────────
+  // ── p14 thread ────────────────────────────────────────────────────────────
   {
     id: "r7",
     postId: "p14",
     authorId: "u4",
-    body: "A fixed camera has a field of view and you can avoid it. Helix follows you, orientates toward you, and processes your data as the primary subject — not incidental background.",
+    body: "A fixed camera has a field of view you can see and usually avoid. Helix follows you. It turns toward you. It treats you as the subject of its attention — not background context.",
     likes: ["u1", "u3"],
     createdAt: now - 9.5 * h,
   },
@@ -71,7 +71,7 @@ export const SEED_REPLIES = [
     id: "r8",
     postId: "p14",
     authorId: "u3",
-    body: "Attribution of intentionality. When the robot turns toward you, your brain reads it as attention and judgment. Studies show autonomic stress response is higher with humanoid observers than fixed cameras.",
+    body: "When Helix turns to face you, your brain reads it as attention — judgment, even. Studies show people have measurably higher stress responses to humanoid observers than to fixed cameras. The face changes everything.",
     likes: ["u1", "u2", "u4"],
     createdAt: now - 9 * h,
   },
@@ -79,17 +79,17 @@ export const SEED_REPLIES = [
     id: "r9",
     postId: "p14",
     authorId: "u2",
-    body: "HRI research (Breazeal, Darling) shows people disclose significantly more personal info to humanoid robots than to screens. The face creates perceived empathy — which is exactly what makes it a privacy vulnerability.",
+    body: "HRI research — Breazeal, Darling and others — shows people share significantly more personal information with humanoid robots than with screens. The perceived empathy is real. And it's exactly what makes it a privacy vulnerability.",
     likes: ["u1", "u4"],
     createdAt: now - 8.5 * h,
   },
 
-  // ── p17 thread: hot take consent impossible ───────────────────────────────
+  // ── p17 thread ────────────────────────────────────────────────────────────
   {
     id: "r10",
     postId: "p17",
     authorId: "u1",
-    body: "Exactly. There's a whole body of HRI research showing people disclose more personal info to humanoid robots than to screen interfaces. The embodiment creates perceived empathy — which is precisely what makes it a privacy risk.",
+    body: "There's a whole field of research on this. The more human the form, the more trust gets triggered — and the more people disclose. The design lowers people's guard. That's not an accident.",
     likes: ["u3", "u4"],
     createdAt: now - 20 * m,
   },
@@ -97,7 +97,7 @@ export const SEED_REPLIES = [
     id: "r11",
     postId: "p17",
     authorId: "u3",
-    body: "Counter: granular consent UX is theoretically possible — opt-out of training specifically while allowing functional use. The problem is implementation in high-turnover warehouse environments.",
+    body: "Counter: technically, granular consent is possible — opt out of training, allow functional use. The problem isn't the concept. It's implementing this in high-turnover warehouse environments where workers have zero leverage.",
     likes: ["u2"],
     createdAt: now - 15 * m,
   },
@@ -105,37 +105,37 @@ export const SEED_REPLIES = [
     id: "r12",
     postId: "p17",
     authorId: "u4",
-    body: "Hard agree with OP. The warehouse worker has no meaningful choice. Real consent requires the ability to refuse without penalty. You can't refuse your employer's robot.",
+    body: "Agree completely. Real consent requires the ability to say no without consequences. You can't say no to your employer's robot. The whole structure makes consent impossible before you even get to the legal question.",
     likes: ["u1", "u2", "u5"],
     createdAt: now - 10 * m,
   },
 
-  // ── p19 thread: labor / IP extraction ─────────────────────────────────────
+  // ── p19 thread ────────────────────────────────────────────────────────────
   {
     id: "r13",
     postId: "p19",
     authorId: "u2",
-    body: "There's a EU labor law angle too. If workers' behavioral data generates commercial value for the employer, there may be a right to information and eventually compensation. Untested in robotics — but coming.",
+    body: "There's a labor law angle here too — especially in the EU. If workers' behavioral data generates commercial value for the employer, there may eventually be a right to information and compensation. Untested in robotics. But the argument is building.",
     likes: ["u4", "u1"],
     createdAt: now - 10 * h,
   },
 
-  // ── p22 thread: governance model ──────────────────────────────────────────
+  // ── p22 thread ────────────────────────────────────────────────────────────
   {
     id: "r14",
     postId: "p22",
     authorId: "u2",
-    body: "Tier 3 is the hardest to enforce — the functional/training boundary is technically blurry. The same gradient descent step that completes a task also updates model weights. Regulators will need technical experts drafting implementation guidance.",
+    body: "Tier 3 is the technically tricky one — the line between functional and training data isn't always clean. The same gradient step that completes a task can also update model weights. Regulators will need real technical expertise to implement this properly.",
     likes: ["u1", "u3"],
     createdAt: now - 1.5 * h,
   },
 
-  // ── p25 thread: functional vs training data ───────────────────────────────
+  // ── p25 thread ────────────────────────────────────────────────────────────
   {
     id: "r15",
     postId: "p25",
     authorId: "u1",
-    body: "This is our primary recommendation. Without this distinction the entire framework defaults to product liability — designed for physical defects, not data harms. The gap is definitional, not enforcement.",
+    body: "This is the core of our paper. Without the functional/training distinction, all humanoid robot data gets treated under product liability law — a framework designed for faulty brake pads, not behavioral profiling. The gap is definitional.",
     likes: ["u2", "u3", "u4"],
     createdAt: now - 4 * d,
   },
@@ -143,19 +143,19 @@ export const SEED_REPLIES = [
     id: "r16",
     postId: "p25",
     authorId: "u4",
-    body: "And this is technically feasible right now. On-device processing with explicit training consent flags. Apple's differential privacy approach is a usable starting point for the architecture.",
+    body: "And it's doable right now. On-device processing with explicit training consent flags. Apple's differential privacy work is a real starting point for the architecture.",
     likes: ["u1", "u2"],
     createdAt: now - 3.5 * d,
   },
 ];
 
 export const SEED_POSTS = [
-  // ── TECHNOLOGY (5 posts) ──────────────────────────────────────────────────
+  // ── TECHNOLOGY ────────────────────────────────────────────────────────────
   {
     id: "p1",
     authorId: "u5",
     topic: "Technology",
-    body: "🧵 Thread: How does Helix 02 actually collect your data? Breaking it down step by step — replies below. #HelixWatch",
+    body: "🧵 Thread: so what's actually happening when Helix 02 is working next to you? Because the technical papers don't explain it in plain English. Let me break it down step by step. Replies below 👇 #HelixWatch",
     media: [
       { type: "image", url: "/Blog/images/p1.png", alt: "Humanoid robot scanning workers in warehouse" },
     ],
@@ -170,7 +170,7 @@ export const SEED_POSTS = [
     id: "p2",
     authorId: "u3",
     topic: "Technology",
-    body: "Helix 02 is a Vision-Language-Action model — vision, language, and motor control in one unified forward pass, ~20× per second. Every pass is a full biometric snapshot of everyone in the workspace. #VLA #EmbodiedAI",
+    body: "Every time Helix 02 completes any action — picking up a box, avoiding a person, responding to a command — it runs a full AI model that sees the room, understands the instruction, and plans the movement. All at once. About 20 times per second. That's 20 full scans of everyone nearby, every second, per robot. #VLA #EmbodiedAI @helixwatch @shirschipper",
     media: [
       { type: "diagram", component: "HelixVLA" },
     ],
@@ -185,7 +185,7 @@ export const SEED_POSTS = [
     id: "p3",
     authorId: "u3",
     topic: "Technology",
-    body: "Figure AI CEO Brett Adcock at Boao Forum 2026: \"Humans working alongside Helix are effectively contributing to its training dataset.\" No consent screen. No opt-out. No disclosed retention limit.",
+    body: "Figure AI's CEO Brett Adcock at Boao Forum 2026: \"humans working alongside Helix are effectively contributing to its training dataset.\" No consent form. No opt-out mechanism. No disclosed retention period. Just said it like it was obvious.",
     media: [{ type: "image", url: "/Blog/images/p3.png", alt: "Tech CEO presenting humanoid robot at conference" }],
     tags: ["edenledom", "oriblum"],
     likes: ["u1", "u2", "u4", "u5"],
@@ -198,7 +198,7 @@ export const SEED_POSTS = [
     id: "p4",
     authorId: "u1",
     topic: "Technology",
-    body: "The key regulatory gap: functional data (real-time use, should delete immediately) vs. training data (retained to improve the model, needs consent). Helix routes both through the same pipeline. @oriblum",
+    body: "There are two completely different types of data Helix collects. Functional data — used in the moment to complete the task, should be deleted right after. Training data — kept to improve future versions, needs proper consent. Helix routes both through the exact same pipeline. Nobody's distinguishing them legally. @oriblum",
     media: [
       { type: "diagram", component: "DataFlow" },
     ],
@@ -213,7 +213,7 @@ export const SEED_POSTS = [
     id: "p5",
     authorId: "u5",
     topic: "Technology",
-    body: "Watch Figure AI's full-body autonomy demo. Notice how the robot navigates around people — each avoidance maneuver is a biometric data point. @danvered",
+    body: "Watch Figure AI's full-body autonomy demo. Every time Helix navigates around a person — each one of those movements is a biometric data point being logged. @danvered",
     media: [{ type: "embed", platform: "youtube", videoId: "Z3yQHYNXPws" }],
     tags: ["danvered"],
     likes: ["u1", "u3", "u4"],
@@ -222,13 +222,11 @@ export const SEED_POSTS = [
     replyIds: [],
     createdAt: now - 1 * d,
   },
-
-  // ── LEGAL (5 posts) ───────────────────────────────────────────────────────
   {
     id: "p6",
     authorId: "u3",
     topic: "Technology",
-    body: "Data governance comparison:\n• Tesla Optimus — opt-in consent referenced in purchase agreement\n• Figure Helix 02 — no published data governance framework at time of writing\n\nThe gap is not technical. It's contractual. @oriblum @edenledom",
+    body: "Quick comparison:\n• Tesla Optimus — opt-in consent is at least mentioned in the purchase agreement\n• Figure Helix 02 — no published data governance framework at all\n\nThis isn't a gap. It's a choice. @oriblum @edenledom",
     media: [{ type: "diagram", component: "RiskMatrix" }],
     tags: ["oriblum", "edenledom"],
     likes: ["u1", "u2", "u4"],
@@ -237,11 +235,13 @@ export const SEED_POSTS = [
     replyIds: [],
     createdAt: now - 2 * d,
   },
+
+  // ── LEGAL ─────────────────────────────────────────────────────────────────
   {
     id: "p7",
     authorId: "u2",
     topic: "Legal",
-    body: "US privacy law for humanoid robots: FTC §5 (reactive, post-harm), BIPA (Illinois only), CCPA (California only), no federal framework. The robot walks into your warehouse and the law shrugs. @edenledom @danvered",
+    body: "The honest state of US privacy law for humanoid robots right now:\n• FTC §5: acts after you've already been harmed\n• BIPA: covers one state\n• CCPA: covers one state\n• Federal robotics framework: doesn't exist\n\nA robot walks into your warehouse and the law has nothing to say about it. @edenledom @danvered",
     media: [{ type: "diagram", component: "LegalSlides" }],
     tags: ["edenledom", "danvered"],
     likes: ["u1", "u3", "u4", "u5"],
@@ -254,7 +254,7 @@ export const SEED_POSTS = [
     id: "p8",
     authorId: "u2",
     topic: "Legal",
-    body: "GDPR Art. 25: privacy by design is legally mandatory — built in before deployment. US equivalent: voluntary NIST guidelines. The asymmetry explains why Helix faces different scrutiny on each side of the Atlantic.",
+    body: "In Europe, privacy-by-design is a legal requirement under Article 25 — before you deploy anything. In the US, the equivalent is the NIST Privacy Framework, which is voluntary. A suggestion. Same robot, two completely different worlds.",
     media: [
       { type: "diagram", component: "LegalComparison" },
     ],
@@ -269,7 +269,7 @@ export const SEED_POSTS = [
     id: "p9",
     authorId: "u1",
     topic: "Legal",
-    body: "Critical gap @oriblum and I identified: product liability law and data protection law don't talk to each other. A robot that misuses biometric data might violate neither — because neither statute was drafted with this use case in mind.",
+    body: "There's a legal gap nobody's really talking about. Product liability law was built for things that physically break. Data protection law was built for digital data processing. A humanoid robot that silently profiles workers might not violate either. We've been documenting this with @oriblum.",
     media: [{ type: "embed", platform: "youtube", videoId: "Nc7hnPpbhyI" }],
     tags: ["oriblum"],
     likes: ["u2", "u3", "u4"],
@@ -282,7 +282,7 @@ export const SEED_POSTS = [
     id: "p10",
     authorId: "u2",
     topic: "Legal",
-    body: "Illinois BIPA: $1,000–$5,000 per violation, private right of action, no proof of harm needed. Warehouses are Helix's primary market. Figure AI's legal exposure in Illinois is not hypothetical.",
+    body: "Illinois BIPA:\n💰 $1,000 per careless violation\n💰 $5,000 per intentional one\n⚖️ Anyone can sue — no regulator required\n⚖️ No proof of harm needed\n\nFigure AI's primary market is warehouses. Illinois has warehouses. Do the math.",
     media: [{ type: "image", url: "/Blog/images/p10.png", alt: "Biometric fingerprint scanner with Illinois BIPA document" }],
     tags: [],
     likes: ["u1", "u4", "u5"],
@@ -295,7 +295,7 @@ export const SEED_POSTS = [
     id: "p11",
     authorId: "u5",
     topic: "Legal",
-    body: "❓ Under GDPR, can 'legitimate interests' justify Helix collecting biometric data of workers who can't opt out? @oriblum answers below 👇",
+    body: "❓ Under GDPR, can a company claim 'legitimate interests' to justify collecting biometric data from workers who literally have no way to refuse? @oriblum answers below 👇",
     media: [{ type: "image", url: "/Blog/images/p11.png", alt: "GDPR scales of justice digital interface" }],
     tags: ["oriblum"],
     likes: ["u1", "u2", "u3"],
@@ -305,12 +305,12 @@ export const SEED_POSTS = [
     createdAt: now - 3 * d,
   },
 
-  // ── PRIVACY (5 posts) ─────────────────────────────────────────────────────
+  // ── PRIVACY ───────────────────────────────────────────────────────────────
   {
     id: "p12",
     authorId: "u4",
     topic: "Privacy",
-    body: "Calo's three-channel privacy harm framework fits Helix exactly: (1) direct surveillance, (2) third-party data access, (3) social meaning — you modify your behavior because you know it's watching. Channel 3 is the hardest to litigate. @edenledom",
+    body: "Ryan Calo mapped out three ways robots harm privacy: direct surveillance, data flowing to third parties, and 'social meaning' — the way being watched by something that feels human changes how you act. Channel 3 is the hardest to prove in court, but for workers near Helix, it might be the most real. @edenledom",
     media: [
       { type: "diagram", component: "CaloFramework" },
     ],
@@ -325,7 +325,7 @@ export const SEED_POSTS = [
     id: "p13",
     authorId: "u4",
     topic: "Privacy",
-    body: "The privacy paradox: consumers say privacy matters, then buy the device anyway. In B2B contexts, workers have no choice at all. Adoption does not prove informed consent. It proves convenience wins.",
+    body: "The 'privacy paradox' says people claim to care about privacy but act like they don't. Sure — but that's when people have a choice. Workers sharing a warehouse with Helix never chose this. Not showing up for your shift isn't consent.",
     media: [{ type: "diagram", component: "PrivacySlides" }],
     tags: [],
     likes: ["u1", "u3", "u5"],
@@ -338,7 +338,7 @@ export const SEED_POSTS = [
     id: "p14",
     authorId: "u1",
     topic: "Privacy",
-    body: "ELI5: Why is a humanoid robot a bigger privacy risk than a wall camera? It's not obvious — @shirschipper @danvered @oriblum weigh in 👇",
+    body: "Genuine question: why is a humanoid robot a bigger privacy problem than a security camera? It doesn't seem obvious at first. @shirschipper @danvered @oriblum — weigh in below 👇",
     media: [{ type: "image", url: "/Blog/images/p14.png", alt: "Humanoid robot facing human worker in corridor" }],
     tags: ["shirschipper", "danvered"],
     likes: ["u2", "u3", "u4"],
@@ -351,7 +351,7 @@ export const SEED_POSTS = [
     id: "p15",
     authorId: "u5",
     topic: "Privacy",
-    body: "Privacy-by-design checklist not mentioned in Figure AI's public docs: on-device processing, auto-anonymization, no raw biometric egress, user audit trail, consent logging, minimum retention schedules. Zero of six. @shirschipper",
+    body: "We went through all of Figure AI's public documentation looking for six basic privacy protections:\n✗ On-device processing requirement\n✗ Automatic face/voice anonymization\n✗ User data audit trail\n✗ Consent logging\n✗ Minimum data retention schedules\n✗ Opt-out mechanism\n\nFound zero. Not one. @shirschipper",
     media: [{ type: "image", url: "/Blog/images/p15.png", alt: "Digital security shield with privacy checklist" }],
     tags: ["shirschipper"],
     likes: ["u1", "u2", "u3", "u4"],
@@ -364,7 +364,7 @@ export const SEED_POSTS = [
     id: "p16",
     authorId: "u4",
     topic: "Privacy",
-    body: "The panopticon effect is literal with Helix — it's always on, you always know it's watching. Calo calls this 'social meaning' harm: the chilling effect on behavior IS the injury, even before any data is breached.",
+    body: "The panopticon worked because people didn't know when they were being watched. Helix is actually worse — you always know it's watching. Workers change how they talk, how they move, what they say near it. That behavioral change is the harm. Before any data is ever breached.",
     media: [{ type: "image", url: "/Blog/images/p16.png", alt: "Surveillance camera watching worker in warehouse" }],
     tags: [],
     likes: ["u1", "u2", "u3"],
@@ -374,12 +374,12 @@ export const SEED_POSTS = [
     createdAt: now - 2 * d,
   },
 
-  // ── ETHICS (5 posts) ──────────────────────────────────────────────────────
+  // ── ETHICS ────────────────────────────────────────────────────────────────
   {
     id: "p17",
     authorId: "u4",
     topic: "Ethics",
-    body: "Hot take: meaningful informed consent to ambient humanoid robots is impossible by design. You can't consent to a system that updates on your behavior in a workplace you didn't choose to enter. Change my mind 👇 @edenledom @danvered",
+    body: "Hot take: genuine informed consent to a humanoid robot is structurally impossible. You can't consent to a system that learns from you, runs in a workplace you didn't choose, and that your income depends on working near. The whole setup makes consent meaningless. Push back below 👇 @edenledom @danvered",
     media: [{ type: "embed", platform: "youtube", videoId: "ZFntEFXKDHM" }],
     tags: ["edenledom", "danvered"],
     likes: ["u1", "u2", "u3", "u5"],
@@ -392,7 +392,7 @@ export const SEED_POSTS = [
     id: "p18",
     authorId: "u1",
     topic: "Ethics",
-    body: "Informed consent for ambient robotics is a design problem, not just a legal one. How do you consent to a system that updates in real time, shares inferences upstream, operates in spaces you didn't choose, and keeps collecting after you leave?",
+    body: "Consent for ambient AI isn't just a legal problem — it's a design problem. How do you consent to something that learns from you in real time, sends inferences upstream, keeps running after you leave, and operates in a space you can't walk away from?",
     media: [{ type: "embed", platform: "youtube", videoId: "DH8wCgwL_1U" }],
     tags: [],
     likes: ["u2", "u3", "u4"],
@@ -405,7 +405,7 @@ export const SEED_POSTS = [
     id: "p19",
     authorId: "u3",
     topic: "Ethics",
-    body: "Warehouse workers interacting with Helix generate IP (training data) for Figure AI without compensation. Platform-economy extraction applied to physical labor. \"You're not the customer. You're the dataset.\" @shirschipper @edenledom",
+    body: "When you work next to Helix, your movements and habits become training data owned by Figure AI — used to build the next version smarter. Without you knowing. Without any compensation. You're not the customer. You're not even just the employee anymore. You're the dataset. @shirschipper @edenledom",
     media: [{ type: "image", url: "/Blog/images/p19.png", alt: "Warehouse workers alongside autonomous robots" }],
     tags: ["shirschipper", "edenledom"],
     likes: ["u1", "u2", "u4", "u5"],
@@ -418,7 +418,7 @@ export const SEED_POSTS = [
     id: "p20",
     authorId: "u2",
     topic: "Ethics",
-    body: "The same sensor stream that lets Helix hand you a package can infer: emotional state from micro-expressions, health condition from gait, relationship patterns from proximity over time. Data minimization is an ethical imperative, not just a legal one.",
+    body: "The same sensor stream that lets Helix hand you a package can also:\n→ Infer how you're feeling from your facial expressions\n→ Pick up on health conditions from how you walk\n→ Map social relationships from who stands close to who\n→ Build a behavioral profile nobody asked for\n\nData minimization isn't a nice-to-have. It's urgent.",
     media: [{ type: "image", url: "/Blog/images/p20.png", alt: "Human body with sensor data streams visualization" }],
     tags: [],
     likes: ["u1", "u3", "u4"],
@@ -431,7 +431,7 @@ export const SEED_POSTS = [
     id: "p21",
     authorId: "u4",
     topic: "Ethics",
-    body: "ACM Code of Ethics, Principle 1.6: \"Respect privacy.\" Can you both respect privacy and build a robot with continuous full-body biometric sensing? That tension is architecturally unresolved — and 1992 ethics principles don't answer it.",
+    body: "ACM Code of Ethics, Principle 1.6: 'respect privacy.' Written in 1992. Now apply it to a robot with full-body continuous biometric sensing deployed at scale. The principle still holds. The architecture doesn't. Nobody has resolved that tension yet.",
     media: [{ type: "image", url: "/Blog/images/p21.png", alt: "Robot and human with ACM Code of Ethics" }],
     tags: [],
     likes: ["u1", "u2", "u3"],
@@ -441,12 +441,12 @@ export const SEED_POSTS = [
     createdAt: now - 4 * d,
   },
 
-  // ── STRATEGY (4 posts) ────────────────────────────────────────────────────
+  // ── STRATEGY ──────────────────────────────────────────────────────────────
   {
     id: "p22",
     authorId: "u1",
     topic: "Strategy",
-    body: "Our proposed 4-tier hybrid governance model: Privacy by Design → DPIA per sector → Functional/Training data distinction → GDPR as global floor. This is the distance between where law is and where it needs to be. Full paper §6. @oriblum @danvered @shirschipper",
+    body: "Here's what we're actually proposing — a 4-tier governance model:\n\nTier 1: Privacy by design baked into the hardware, before market\nTier 2: Impact assessment required per sector, before deployment\nTier 3: Functional and training data treated as legally different\nTier 4: GDPR as the global baseline, US rules on top\n\nThis is the gap between where the law is today and where it needs to go. @oriblum @danvered @shirschipper",
     media: [
       { type: "diagram", component: "GovernanceModel" },
     ],
@@ -461,7 +461,7 @@ export const SEED_POSTS = [
     id: "p23",
     authorId: "u2",
     topic: "Strategy",
-    body: "EU AI Act + GDPR already form a de facto governance stack for humanoid robots in EU jurisdictions. If Figure AI wants both US and EU markets at scale, they'll build to GDPR standards regardless. Regulatory arbitrage has hard limits.",
+    body: "Here's the pragmatic argument: Figure AI needs the EU market at scale. The EU has the GDPR and the AI Act. If you build to those standards, you're protected everywhere. Regulatory arbitrage eventually hits a ceiling when the revenue is too big to risk. GDPR wins by default — not because it should, but because the market forces it.",
     media: [{ type: "diagram", component: "RegulationSlides" }],
     tags: [],
     likes: ["u1", "u3", "u5"],
@@ -474,7 +474,7 @@ export const SEED_POSTS = [
     id: "p24",
     authorId: "u1",
     topic: "Strategy",
-    body: "Privacy-by-design as competitive strategy, not compliance cost:\n✓ Trust accelerates enterprise adoption\n✓ DPA approval unlocks EU market\n✓ Consent frameworks prevent labor disputes\n✓ Transparency vs. Chinese competitors\n\nPublish the data governance white paper, Figure AI. @helixwatch @danvered",
+    body: "The case for privacy-by-design as a business strategy, not just compliance:\n✓ Enterprise customers trust you faster\n✓ EU DPA approval opens a massive market\n✓ Consent frameworks protect against labor litigation\n✓ Transparency is a real differentiator vs. competitors who won't\n\nJust publish the data governance white paper, Figure AI. @helixwatch @danvered",
     media: [{ type: "image", url: "/Blog/images/p24.png", alt: "Business meeting with privacy strategy whitepaper" }],
     tags: ["helixwatch", "danvered"],
     likes: ["u2", "u3", "u4"],
@@ -487,7 +487,7 @@ export const SEED_POSTS = [
     id: "p25",
     authorId: "u3",
     topic: "Strategy",
-    body: "The single most important regulatory innovation for embodied AI: treat functional data and training data as legally distinct. Without this, all humanoid robot data defaults to product telemetry. With it, regulators can mandate DPIA + consent for any training-purpose retention. This is our paper's core recommendation.",
+    body: "The most important regulatory move for embodied AI right now: legally separate functional data from training data. Without that distinction, everything defaults to product telemetry law — a framework built for faulty brake pads, not behavioral profiling. That's what our paper is really arguing for.",
     media: [{ type: "diagram", component: "Timeline" }],
     tags: [],
     likes: ["u1", "u2", "u4", "u5"],
