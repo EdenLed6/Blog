@@ -3,7 +3,7 @@ export default function HelixVLA() {
   return (
     <div className="rounded-xl overflow-hidden border border-border bg-card p-4 mt-3">
       <p className="text-xs text-slate-500 uppercase tracking-wide font-medium mb-4">
-        How Helix 02 Works — VLA Architecture
+        How Helix 02 Works, VLA Architecture
       </p>
 
       <div className="space-y-2">
@@ -15,7 +15,7 @@ export default function HelixVLA() {
               <span key={s} className="text-sm bg-slate-700 text-slate-300 px-2 py-0.5 rounded-full">{s}</span>
             ))}
           </div>
-          <p className="text-xs text-red-400 mt-2">⚠ Captures bystanders, faces, voices — continuously</p>
+          <p className="text-xs text-red-400 mt-2">⚠ Captures bystanders, faces, voices, continuously</p>
         </div>
 
         {/* Arrow */}
@@ -40,7 +40,7 @@ export default function HelixVLA() {
               <p className="text-xs text-slate-400">Plan movement</p>
             </div>
           </div>
-          <p className="text-xs text-blue-400 mt-2">Single unified forward pass — no separate modules</p>
+          <p className="text-xs text-blue-400 mt-2">Single unified forward pass, no separate modules</p>
         </div>
 
         {/* Arrow fork */}
@@ -53,18 +53,18 @@ export default function HelixVLA() {
           <div className="rounded-lg border border-green-700 bg-green-900/20 p-2.5">
             <p className="text-sm font-semibold text-green-300 mb-1">③a Immediate Action</p>
             <p className="text-xs text-slate-400">Whole-body controller executes movement in real time</p>
-            <p className="text-xs text-green-400 mt-1">✓ Functional data — should be discarded</p>
+            <p className="text-xs text-green-400 mt-1">✓ Functional data, should be discarded</p>
           </div>
           <div className="rounded-lg border border-red-700 bg-red-900/20 p-2.5">
             <p className="text-sm font-semibold text-red-300 mb-1">③b Model Update</p>
             <p className="text-xs text-slate-400">Experience retained for gradient descent training</p>
-            <p className="text-xs text-red-400 mt-1">⚠ Training data — needs consent</p>
+            <p className="text-xs text-red-400 mt-1">⚠ Training data, needs consent</p>
           </div>
         </div>
       </div>
 
       <p className="text-xs text-slate-500 mt-3 text-center">
-        Source: Figure AI (2026) — Helix 02: Full-Body Autonomy
+        Source: Figure AI (2026), Helix 02: Full-Body Autonomy
       </p>
     </div>
   );

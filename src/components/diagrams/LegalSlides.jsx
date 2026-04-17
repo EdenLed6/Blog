@@ -6,9 +6,9 @@ const slides = [
     icon: "🇺🇸",
     color: "border-red-700 bg-red-900/20",
     points: [
-      "FTC Act §5 — covers \"unfair\" practices, reactive only",
-      "BIPA — Illinois only, biometric data",
-      "CCPA/CPRA — California consumers only",
+      "FTC Act §5, covers \"unfair\" practices, reactive only",
+      "BIPA, Illinois only, biometric data",
+      "CCPA/CPRA, California consumers only",
       "No unified federal robotics or AI privacy law",
     ],
     verdict: "The robot walks into your warehouse and the law shrugs.",
@@ -20,7 +20,7 @@ const slides = [
     points: [
       "$1,000 per negligent violation",
       "$5,000 per intentional violation",
-      "Private right of action — no regulator needed",
+      "Private right of action, no regulator needed",
       "No proof of actual harm required",
     ],
     verdict: "Warehouses are Helix's primary market. This is not hypothetical.",
@@ -87,7 +87,7 @@ export default function LegalSlides() {
     >
       {/* Label */}
       <p className="text-xs text-slate-500 uppercase tracking-wide font-medium mb-2">
-        Key Legal Challenges — Humanoid Robots
+        Key Legal Challenges, Humanoid Robots
       </p>
 
       {/* Instagram-style progress bar */}

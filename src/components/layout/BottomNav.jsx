@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Home, Cpu, Scale, ShieldAlert, Brain, TrendingUp } from "lucide-react";
+import { Home, Cpu, Scale, ShieldAlert, Brain, TrendingUp, Info } from "lucide-react";
 
 const NAV_ITEMS = [
   { to: "/", label: "Home", icon: Home, end: true },
@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { to: "/privacy", label: "Privacy", icon: ShieldAlert },
   { to: "/ethics", label: "Ethics", icon: Brain },
   { to: "/strategy", label: "Strategy", icon: TrendingUp },
+  { to: "/about", label: "About", icon: Info },
 ];
 
 export default function BottomNav() {

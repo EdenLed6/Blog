@@ -18,7 +18,7 @@ export default function AppShell() {
         xl:grid-cols-[280px_1fr_320px]
         min-h-screen">
 
-        {/* Left Sidebar — hidden on mobile */}
+        {/* Left Sidebar, hidden on mobile */}
         <div className="hidden md:block">
           <LeftSidebar onNewPost={() => setComposerOpen(true)} />
         </div>
@@ -28,13 +28,13 @@ export default function AppShell() {
           <Outlet />
         </main>
 
-        {/* Right Panel — hidden below lg */}
+        {/* Right Panel, hidden below lg */}
         <div className="hidden lg:block">
           <RightPanel />
         </div>
       </div>
 
-      {/* Bottom nav — mobile only */}
+      {/* Bottom nav, mobile only */}
       <BottomNav />
 
       {/* Mobile FAB for new post */}

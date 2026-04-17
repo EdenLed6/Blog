@@ -1,4 +1,4 @@
-// Interactive Risk Matrix — Humanoid Robot Data Governance
+// Interactive Risk Matrix, Humanoid Robot Data Governance
 export default function RiskMatrix() {
   const points = [
     {

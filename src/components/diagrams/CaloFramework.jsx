@@ -3,14 +3,14 @@ export default function CaloFramework() {
   return (
     <div className="rounded-xl overflow-hidden border border-border bg-card p-4 mt-3">
       <p className="text-xs text-slate-500 uppercase tracking-wide font-medium mb-4">
-        Calo (2010) — Three Channels of Robotic Privacy Harm
+        Calo (2010), Three Channels of Robotic Privacy Harm
       </p>
       <div className="flex flex-col sm:flex-row gap-3">
         {[
           {
             num: "1",
             title: "Direct Surveillance",
-            desc: "Robot observes people in spaces where they don't expect monitoring — home, office, warehouse.",
+            desc: "Robot observes people in spaces where they don't expect monitoring, home, office, warehouse.",
             color: "border-red-700 bg-red-900/20",
             textColor: "text-red-300",
             numColor: "bg-red-700",
@@ -18,7 +18,7 @@ export default function CaloFramework() {
           {
             num: "2",
             title: "Increased Access",
-            desc: "Sensor streams aggregated by manufacturer or third parties — face, gait, voice, room layout.",
+            desc: "Sensor streams aggregated by manufacturer or third parties, face, gait, voice, room layout.",
             color: "border-amber-700 bg-amber-900/20",
             textColor: "text-amber-300",
             numColor: "bg-amber-700",
@@ -26,7 +26,7 @@ export default function CaloFramework() {
           {
             num: "3",
             title: "Social Meaning",
-            desc: "Being watched by an embodied machine changes how people speak and behave — even if no data is stored.",
+            desc: "Being watched by an embodied machine changes how people speak and behave, even if no data is stored.",
             color: "border-purple-700 bg-purple-900/20",
             textColor: "text-purple-300",
             numColor: "bg-purple-700",

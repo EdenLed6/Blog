@@ -4,6 +4,7 @@ import AppShell from "./components/layout/AppShell.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import TopicPage from "./pages/TopicPage.jsx";
 import PostDetailPage from "./pages/PostDetailPage.jsx";
+import AboutPage from "./pages/AboutPage.jsx";
 import { useEffect } from "react";
 
 function ScrollToTop() {
@@ -30,6 +31,7 @@ export default function App() {
             <Route path="ethics" element={<TopicPage topic="Ethics" />} />
             <Route path="strategy" element={<TopicPage topic="Strategy" />} />
             <Route path="post/:id" element={<PostDetailPage />} />
+            <Route path="about" element={<AboutPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

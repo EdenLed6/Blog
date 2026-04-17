@@ -18,7 +18,7 @@ const slides = [
     icon: "🔐",
     color: "border-blue-700 bg-blue-900/20",
     points: [
-      "Privacy by design and by default — legally mandatory",
+      "Privacy by design and by default, legally mandatory",
       "Data minimization: collect only what's strictly necessary",
       "Purpose limitation: can't use data beyond original purpose",
       "Applies to any company processing EU residents' data",
@@ -32,7 +32,7 @@ const slides = [
     points: [
       "No equivalent to EU AI Act at federal level",
       "NIST AI Risk Management Framework is voluntary",
-      "FTC can act on unfair/deceptive practices — post-harm",
+      "FTC can act on unfair/deceptive practices, post-harm",
       "State-by-state patchwork: IL, TX, WA have biometric laws",
     ],
     verdict: "Reactive, fragmented, and ill-equipped for humanoid robot deployment at scale.",
@@ -42,9 +42,9 @@ const slides = [
     icon: "🏗️",
     color: "border-purple-700 bg-purple-900/20",
     points: [
-      "Tier 1: Privacy by Design — architectural mandates, pre-market",
-      "Tier 2: DPIA — per sector, before deployment",
-      "Tier 3: Functional/Training data distinction — separate legal treatment",
+      "Tier 1: Privacy by Design, architectural mandates, pre-market",
+      "Tier 2: DPIA, per sector, before deployment",
+      "Tier 3: Functional/Training data distinction, separate legal treatment",
       "Tier 4: GDPR as global floor + US sectoral overlay",
     ],
     verdict: "This is the distance between where law is and where it needs to be.",
@@ -86,7 +86,7 @@ export default function RegulationSlides() {
       style={{ touchAction: "pan-y" }}
     >
       <p className="text-xs text-slate-500 uppercase tracking-wide font-medium mb-2">
-        Regulatory Landscape — AI &amp; Humanoid Robots
+        Regulatory Landscape, AI &amp; Humanoid Robots
       </p>
 
       <div className="flex gap-1 mb-3">

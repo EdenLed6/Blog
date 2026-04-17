@@ -7,7 +7,7 @@ const slides = [
     color: "border-red-700 bg-red-900/20",
     points: [
       "RGB cameras + depth sensors at ~20 fps",
-      "Captures faces, gait, voice — simultaneously",
+      "Captures faces, gait, voice, simultaneously",
       "Even bystanders not interacting are in every frame",
       "20 biometric snapshots per second, per person in range",
     ],
@@ -19,9 +19,9 @@ const slides = [
     color: "border-amber-700 bg-amber-900/20",
     points: [
       "Bentham's panopticon: uncertainty of being watched changes behavior",
-      "With Helix: no uncertainty — you know it's always watching",
+      "With Helix: no uncertainty, you know it's always watching",
       "Workers self-censor, modify behavior, feel psychological stress",
-      "Calo: 'social meaning' harm — the chilling effect IS the injury",
+      "Calo: 'social meaning' harm, the chilling effect IS the injury",
     ],
     verdict: "The harm happens before any data is breached.",
   },
@@ -86,7 +86,7 @@ export default function PrivacySlides() {
       style={{ touchAction: "pan-y" }}
     >
       <p className="text-xs text-slate-500 uppercase tracking-wide font-medium mb-2">
-        Privacy Risks — Humanoid Robots
+        Privacy Risks, Humanoid Robots
       </p>
 
       <div className="flex gap-1 mb-3">

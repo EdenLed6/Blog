@@ -71,7 +71,7 @@ const PostCard = memo(function PostCard({ post, expandReplies = false }) {
             <TopicBadge topic={post.topic} size="xs" />
           </div>
 
-          {/* Body — LinkedIn-style "See more" truncation */}
+          {/* Body, LinkedIn-style "See more" truncation */}
           <div className="mt-2 text-slate-200 text-sm leading-relaxed">
             {isLong && !bodyExpanded ? (
               <>

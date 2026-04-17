@@ -74,7 +74,7 @@ export default function RightPanel() {
           <h3 className="text-sm font-semibold text-white">About this project</h3>
         </div>
         <p className="text-xs text-slate-300 leading-relaxed">
-          A semester-long research deep-dive into what humanoid robots like Figure AI's Helix mean for worker privacy — and whether the law is anywhere close to ready.
+          A semester-long research deep-dive into what humanoid robots like Figure AI's Helix mean for worker privacy, and whether the law is anywhere close to ready.
         </p>
         <p className="text-xs text-slate-500 mt-2">
           By Eden, Orianne, Dan & Shir · Group 8

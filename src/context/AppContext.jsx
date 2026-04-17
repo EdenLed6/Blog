@@ -152,13 +152,13 @@ export function AppProvider({ children }) {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch {
-      // quota exceeded — ignore
+      // quota exceeded, ignore
     }
   }, [state]);
 
   const currentUser = state.userMap[state.currentUserId];
 
-  // Sorted posts array (newest first) — recomputed only when postMap changes
+  // Sorted posts array (newest first), recomputed only when postMap changes
   const posts = useMemo(
     () =>
       Object.values(state.postMap).sort((a, b) => b.createdAt - a.createdAt),

@@ -3,7 +3,7 @@ export default function DataFlow() {
   return (
     <div className="rounded-xl overflow-hidden border border-border bg-card p-4 mt-3">
       <p className="text-xs text-slate-500 uppercase tracking-wide font-medium mb-4">
-        The Critical Distinction — How Helix Data Flows
+        The Critical Distinction, How Helix Data Flows
       </p>
 
       {/* Sensor input */}
@@ -77,7 +77,7 @@ export default function DataFlow() {
 
       <div className="mt-3 p-2 bg-amber-900/20 border border-amber-700/50 rounded-lg">
         <p className="text-sm text-amber-300 text-center">
-          ⚡ Helix's pipeline doesn't separate these — both flow through the same architecture. This is the regulatory gap.
+          ⚡ Helix's pipeline doesn't separate these, both flow through the same architecture. This is the regulatory gap.
         </p>
       </div>
     </div>

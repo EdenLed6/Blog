@@ -121,7 +121,7 @@ export default function PostDetailPage() {
       {/* Replies */}
       <div>
         {replies.length === 0 ? (
-          <div className="py-12 text-center text-slate-600 text-sm">No replies yet — be the first to respond.</div>
+          <div className="py-12 text-center text-slate-600 text-sm">No replies yet, be the first to respond.</div>
         ) : (
           replies.map((reply) => (
             <div key={reply.id} className="px-4 border-b border-border">

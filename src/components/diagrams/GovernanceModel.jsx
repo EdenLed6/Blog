@@ -50,7 +50,7 @@ export default function GovernanceModel() {
   return (
     <div className="rounded-xl overflow-hidden border border-border bg-card p-4 mt-3">
       <p className="text-xs text-slate-500 uppercase tracking-wide font-medium mb-4">
-        Proposed Hybrid Governance Model — Group 8
+        Proposed Hybrid Governance Model, Group 8
       </p>
       <div className="space-y-2">
         {tiers.map((t) => (
@@ -63,7 +63,7 @@ export default function GovernanceModel() {
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className="text-sm">{t.icon}</span>
                   <span className="text-sm font-semibold text-white">{t.title}</span>
-                  <span className="text-xs text-slate-400">— {t.subtitle}</span>
+                  <span className="text-xs text-slate-400">- {t.subtitle}</span>
                   <span className="text-xs bg-white/10 text-slate-400 px-1.5 py-0.5 rounded-full ml-auto">{t.timing}</span>
                 </div>
                 <p className="text-sm text-slate-400 mt-1">{t.desc}</p>

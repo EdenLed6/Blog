@@ -27,7 +27,7 @@ export default function Modal({ isOpen, onClose, title, children, wide = false }
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
-      {/* Panel — slides up from bottom on mobile, centered on desktop */}
+      {/* Panel, slides up from bottom on mobile, centered on desktop */}
       <div
         className={`relative z-10 w-full ${wide ? "sm:max-w-2xl" : "sm:max-w-lg"} bg-card border border-border rounded-t-2xl sm:rounded-2xl shadow-2xl shadow-black/50`}
       >

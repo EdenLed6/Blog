@@ -26,12 +26,12 @@ export default function AboutBanner() {
       {open && (
         <div className="mt-4 space-y-3 text-sm text-slate-300 leading-relaxed">
           <p>
-            Figure AI just deployed Helix 02 — a humanoid robot that works alongside humans in warehouses,
+            Figure AI just deployed Helix 02, a humanoid robot that works alongside humans in warehouses,
             watching, learning, and collecting data 24/7. Nobody asked the workers if that was okay.
           </p>
           <p>
             This blog is a research project exploring what that actually means for your privacy.
-            We're four students — <span className="text-white font-medium">Eden, Orianne, Dan & Shir</span> —
+            We're four students, <span className="text-white font-medium">Eden, Orianne, Dan & Shir</span> -
             who spent a semester digging into the legal gaps, the ethical questions, and what regulations
             (if any) can keep up with this technology.
           </p>

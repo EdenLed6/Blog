@@ -1,10 +1,10 @@
 // US vs EU Legal Framework Comparison
 export default function LegalComparison() {
   const rows = [
-    { label: "Approach", us: "Reactive — fix after harm", eu: "Preventive — mandate before deployment" },
+    { label: "Approach", us: "Reactive, fix after harm", eu: "Preventive, mandate before deployment" },
     { label: "Basis", us: "FTC Act §5, state BIPA, CCPA", eu: "GDPR Art. 25 + EU AI Act" },
     { label: "Privacy by Design", us: "Voluntary (NIST guidelines)", eu: "Legally mandatory" },
-    { label: "Biometric Data", us: "State-level only (IL, TX, WA)", eu: "Special category — strict consent" },
+    { label: "Biometric Data", us: "State-level only (IL, TX, WA)", eu: "Special category, strict consent" },
     { label: "Impact Assessment", us: "Not required", eu: "Required for high-risk AI" },
     { label: "Enforcement", us: "Post-violation litigation", eu: "Pre-deployment DPA approval" },
   ];
