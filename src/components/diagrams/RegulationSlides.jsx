@@ -79,7 +79,12 @@ export default function RegulationSlides() {
   };
 
   return (
-    <div className="rounded-xl overflow-hidden border border-border bg-card p-3 sm:p-4 mt-3">
+    <div
+      className="rounded-xl overflow-hidden border border-border bg-card p-3 sm:p-4 mt-3"
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      style={{ touchAction: "pan-y" }}
+    >
       <div className="flex items-center justify-between mb-3">
         <p className="text-xs sm:text-sm text-slate-500 uppercase tracking-wide font-medium">
           Regulatory Landscape — AI &amp; Humanoid Robots
@@ -87,11 +92,7 @@ export default function RegulationSlides() {
         <span className="text-xs sm:text-sm text-slate-600">{current + 1} / {slides.length}</span>
       </div>
 
-      <div
-        className={`rounded-lg border ${s.color} p-4 sm:p-5 transition-all select-none`}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-      >
+      <div className={`rounded-lg border ${s.color} p-4 sm:p-5 transition-all select-none`}>
         <div className="flex items-center gap-2 mb-3">
           <span className="text-2xl flex-shrink-0">{s.icon}</span>
           <h3 className="text-base sm:text-lg font-bold text-white leading-tight">{s.title}</h3>
