@@ -1,7 +1,6 @@
 import { HashRouter as BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AppProvider } from "./context/AppContext.jsx";
 import AppShell from "./components/layout/AppShell.jsx";
-import HomePage from "./pages/HomePage.jsx";
 import TopicPage from "./pages/TopicPage.jsx";
 import PostDetailPage from "./pages/PostDetailPage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
@@ -24,7 +23,7 @@ export default function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<AppShell />}>
-            <Route index element={<HomePage />} />
+            <Route index element={<AboutPage />} />
             <Route path="technology" element={<TopicPage topic="Technology" />} />
             <Route path="legal" element={<TopicPage topic="Legal" />} />
             <Route path="privacy" element={<TopicPage topic="Privacy" />} />

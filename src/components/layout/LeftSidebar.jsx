@@ -1,18 +1,17 @@
 import { NavLink } from "react-router-dom";
 import {
-  Home, Cpu, Scale, ShieldAlert, Brain, TrendingUp, PenSquare, Bot, Info,
+  Cpu, Scale, ShieldAlert, Brain, TrendingUp, PenSquare, Bot, Info,
 } from "lucide-react";
 import Avatar from "../ui/Avatar.jsx";
 import { useApp } from "../../context/AppContext.jsx";
 
 const NAV_ITEMS = [
-  { to: "/", label: "Home", icon: Home, end: true },
+  { to: "/", label: "About", icon: Info, end: true },
   { to: "/technology", label: "Technology", icon: Cpu },
   { to: "/legal", label: "Legal", icon: Scale },
   { to: "/privacy", label: "Privacy", icon: ShieldAlert },
   { to: "/ethics", label: "Ethics", icon: Brain },
   { to: "/strategy", label: "Strategy", icon: TrendingUp },
-  { to: "/about", label: "About", icon: Info },
 ];
 
 export default function LeftSidebar({ onNewPost }) {
