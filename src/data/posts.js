@@ -89,7 +89,7 @@ export const SEED_REPLIES = [
     id: "r10",
     postId: "p17",
     authorId: "u1",
-    body: "There's a whole field of research on this. The more human the form, the more trust gets triggered, and the more people disclose. The design lowers people's guard. That's not an accident.",
+    body: "The more human the robot feels, the more people trust it and open up. That is great for UX — and exactly why workers become silent training data.",
     likes: ["u3", "u4"],
     createdAt: now - 20 * m,
   },
@@ -125,7 +125,7 @@ export const SEED_REPLIES = [
     id: "r14",
     postId: "p22",
     authorId: "u2",
-    body: "Tier 3 is the technically tricky one, the line between functional and training data isn't always clean. The same gradient step that completes a task can also update model weights. Regulators will need real technical expertise to implement this properly.",
+    body: "Separating \"what runs the shift\" from \"what trains the model\" is technically hard, but essential. Without that line, every shift becomes a free data source.",
     likes: ["u1", "u3"],
     createdAt: now - 1.5 * h,
   },
@@ -146,6 +146,36 @@ export const SEED_REPLIES = [
     body: "And it's doable right now. On-device processing with explicit training consent flags. Apple's differential privacy work is a real starting point for the architecture.",
     likes: ["u1", "u2"],
     createdAt: now - 3.5 * d,
+  },
+
+  // ── p2 thread ─────────────────────────────────────────────────────────────
+  {
+    id: "r17",
+    postId: "p2",
+    authorId: "u1",
+    body: "Sensors build a live 3D scene; every person nearby is in every frame. One unified model decides both what Helix sees and what it does next.",
+    likes: ["u3", "u4"],
+    createdAt: now - 1.5 * h,
+  },
+
+  // ── p8 thread ─────────────────────────────────────────────────────────────
+  {
+    id: "r18",
+    postId: "p8",
+    authorId: "u2",
+    body: "A weak U.S. federal law could even preempt stronger state rules. Regulators know humanoid robots are coming; industry knows where the gaps are.",
+    likes: ["u1", "u3"],
+    createdAt: now - 1.5 * h,
+  },
+
+  // ── p12 thread ────────────────────────────────────────────────────────────
+  {
+    id: "r19",
+    postId: "p12",
+    authorId: "u3",
+    body: "People show higher stress and share more with humanoid observers than with screens or static cameras. The \"face\" is a design choice — and a privacy risk.",
+    likes: ["u1", "u4"],
+    createdAt: now - 30 * m,
   },
 ];
 
@@ -170,7 +200,7 @@ export const SEED_POSTS = [
     id: "p2",
     authorId: "u3",
     topic: "Technology",
-    body: "Every humanoid robot in the room is scanning you 20 times a second.\n\nNot passively recording. Actively processing, seeing the space, identifying people, planning its next move. All at once. Every second.\n\nEach time Helix picks up a box, steps around a person, or follows a command, a full AI model fires. It reads the room. Interprets the instruction. Calculates the movement. Then does it again.\n\nThat's not a camera on a wall. That's continuous, real-time intelligence, with you in the frame. #VLA #EmbodiedAI @helixwatch @shirschipper",
+    body: "Each time Helix 02 moves, a full AI loop runs. It maps the floor, detects people, interprets commands, and plans its next step — all in a single pass, dozens of times per second.\n\nTakeaway: This is continuous intelligence, not a passive camera. #VLA #EmbodiedAI @helixwatch @shirschipper",
     media: [
       { type: "diagram", component: "HelixVLA" },
     ],
@@ -178,7 +208,7 @@ export const SEED_POSTS = [
     likes: ["u1", "u2", "u4", "u5"],
     reposts: ["u1", "u5"],
     bookmarks: ["u2", "u4"],
-    replyIds: [],
+    replyIds: ["r17"],
     createdAt: now - 2 * h,
   },
   {
@@ -254,7 +284,7 @@ export const SEED_POSTS = [
     id: "p8",
     authorId: "u2",
     topic: "Legal",
-    body: "Same robot. Two completely different legal realities.\n\nIn Europe, privacy-by-design is the law. Article 25 of the GDPR requires it before a single humanoid robot is deployed.\n\nIn the US? The NIST Privacy Framework is the closest equivalent, but it's voluntary. A suggestion on paper, not a mandate in court.\n\n• Europe: build privacy in from day one, or face legal consequences\n• US: build privacy in if you feel like it\n\nThe robot is identical. The accountability is not.",
+    body: "Same robot, two completely different legal worlds.\n\nIn Europe, GDPR forces privacy-by-design and impact assessments before deployment.\n\nIn the U.S., fragmented laws usually react only after something goes wrong.\n\nTakeaway: The accountability changes at the border. Helix does not.",
     media: [
       { type: "diagram", component: "LegalComparison" },
     ],
@@ -262,8 +292,8 @@ export const SEED_POSTS = [
     likes: ["u1", "u3", "u5"],
     reposts: ["u3"],
     bookmarks: ["u1", "u4"],
-    replyIds: [],
-    createdAt: now - 6 * h,
+    replyIds: ["r18"],
+    createdAt: now - 2 * h,
   },
   {
     id: "p9",
@@ -310,7 +340,7 @@ export const SEED_POSTS = [
     id: "p12",
     authorId: "u4",
     topic: "Privacy",
-    body: "Being watched by a camera is one thing. Being watched by something that looks back at you is something else entirely.\n\nRyan Calo identified three ways robots threaten privacy:\n\n• Direct surveillance: collecting data on you\n• Third-party data flows: that data moving somewhere you never agreed to\n• Social meaning: the psychological weight of being observed by something that feels human\n\nThe third one is the hardest to prove in court. But for workers sharing a floor with Helix, it might be the most real. @edenledom",
+    body: "Being watched by a fixed camera is one thing. Being watched by something that turns to follow you is something else.\n\nCalo's three harms — direct surveillance, increased access, social meaning — all show up when Helix shares a floor with workers.\n\nTakeaway: Helix does not just record behavior; it changes it. @edenledom",
     media: [
       { type: "diagram", component: "CaloFramework" },
     ],
@@ -318,7 +348,7 @@ export const SEED_POSTS = [
     likes: ["u1", "u2", "u3", "u5"],
     reposts: ["u1", "u2"],
     bookmarks: ["u1", "u3", "u5"],
-    replyIds: [],
+    replyIds: ["r19"],
     createdAt: now - 1 * h,
   },
   {
@@ -379,7 +409,7 @@ export const SEED_POSTS = [
     id: "p17",
     authorId: "u4",
     topic: "Ethics",
-    body: "When a humanoid robot is deployed at your workplace, can you truly consent to it?\n\nThink about what you're actually agreeing to:\n\n• A system that learns from you constantly\n• A workplace you didn't choose, the employer did\n• A paycheck that depends on you showing up anyway\n\nSaying no is technically an option. But 'no' means not showing up. And not showing up means losing your job.\n\nThat's not informed consent. That's coercion with extra steps. Push back below 👇 @edenledom @danvered",
+    body: "Can you really \"consent\" to a robot that watches you at work?\n\nOn paper you can say no. In reality, \"no\" means losing your job.\n\nThat turns classic privacy talk into a labor problem.\n\nTakeaway: Consent is not meaningful when walking away is not an option. @edenledom @danvered",
     media: [{ type: "embed", platform: "youtube", videoId: "ZFntEFXKDHM" }],
     tags: ["edenledom", "danvered"],
     likes: ["u1", "u2", "u3", "u5"],
@@ -446,7 +476,7 @@ export const SEED_POSTS = [
     id: "p22",
     authorId: "u1",
     topic: "Strategy",
-    body: "A semester of research led us here. This is the governance framework humanoid robots actually need.\n\nThe law isn't keeping up. So we built a model that does.\n\n• Tier 1: Privacy by design baked into the hardware, before it hits the market. Not a checkbox. Architecture.\n• Tier 2: A data protection impact assessment required per sector, before any deployment.\n• Tier 3: Functional and training data treated as legally distinct, because they serve completely different purposes.\n• Tier 4: GDPR as the global floor, with US sector-specific rules layered on top.\n\nThis is the gap between where the law is and where it has to be. @oriblum @danvered @shirschipper",
+    body: "If Helix is here to stay, governance has to move into the design phase.\n\nOur four-tier model says: privacy-by-design, deployment-specific impact assessments, strict separation between functional and training data, and GDPR-level rules as the baseline.\n\nTakeaway: Treat humanoid robots as high-risk data systems, not just smart products. @oriblum @danvered @shirschipper",
     media: [
       { type: "diagram", component: "GovernanceModel" },
     ],
