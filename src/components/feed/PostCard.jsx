@@ -29,19 +29,14 @@ function parseBody(body, userMap) {
   });
 }
 
-const TRUNCATE = 220;
-
 const PostCard = memo(function PostCard({ post, expandReplies = false }) {
   const { userMap } = useApp();
   const navigate = useNavigate();
   const [repliesOpen, setRepliesOpen] = useState(expandReplies);
   const [replyComposerOpen, setReplyComposerOpen] = useState(false);
-  const [bodyExpanded, setBodyExpanded] = useState(false);
 
   const author = userMap[post.authorId];
   if (!author) return null;
-
-  const isLong = post.body.length > TRUNCATE;
 
   const handleCardClick = (e) => {
     if (e.target.closest("a, button, iframe, video")) return;
@@ -71,32 +66,9 @@ const PostCard = memo(function PostCard({ post, expandReplies = false }) {
             <TopicBadge topic={post.topic} size="xs" />
           </div>
 
-          {/* Body, LinkedIn-style "See more" truncation */}
+          {/* Body */}
           <div className="mt-2 text-slate-200 text-sm leading-relaxed">
-            {isLong && !bodyExpanded ? (
-              <>
-                {parseBody(post.body.slice(0, TRUNCATE), userMap)}
-                <span className="text-slate-600">… </span>
-                <button
-                  onClick={(e) => { e.stopPropagation(); setBodyExpanded(true); }}
-                  className="text-accent-blue hover:underline text-sm font-medium"
-                >
-                  See more
-                </button>
-              </>
-            ) : (
-              <>
-                {parseBody(post.body, userMap)}
-                {isLong && (
-                  <button
-                    onClick={(e) => { e.stopPropagation(); setBodyExpanded(false); }}
-                    className="block mt-1 text-accent-blue hover:underline text-sm font-medium"
-                  >
-                    See less
-                  </button>
-                )}
-              </>
-            )}
+            {parseBody(post.body, userMap)}
           </div>
 
           {/* Media */}

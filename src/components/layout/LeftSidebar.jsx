@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 import {
-  Cpu, Scale, ShieldAlert, Brain, TrendingUp, PenSquare, Bot, Info,
+  Cpu, Scale, ShieldAlert, Brain, TrendingUp, PenSquare, Bot, Home,
 } from "lucide-react";
 import Avatar from "../ui/Avatar.jsx";
 import { useApp } from "../../context/AppContext.jsx";
 
 const NAV_ITEMS = [
-  { to: "/", label: "About", icon: Info, end: true },
+  { to: "/", label: "About", icon: Home, end: true },
   { to: "/technology", label: "Technology", icon: Cpu },
   { to: "/legal", label: "Legal", icon: Scale },
   { to: "/privacy", label: "Privacy", icon: ShieldAlert },
