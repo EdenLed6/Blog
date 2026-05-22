@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HelixWatch — Privacy in the Age of Humanoid Robotics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #080B14;
+    --card: #0D1220;
+    --card-hover: #111827;
+    --border: #1E2A3A;
+    --blue: #3B82F6;
+    --indigo: #6366F1;
+    --purple: #8B5CF6;
+    --text: #E2E8F0;
+    --muted: #94A3B8;
+    --muted-2: #64748B;
+    --muted-3: #475569;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Layout */
+  .shell {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 280px 1fr 320px;
+    min-height: 100vh;
+  }
+  @media (max-width: 1024px) {
+    .shell { grid-template-columns: 60px 1fr; }
+    .right { display: none; }
+  }
+  @media (max-width: 640px) {
+    .shell { grid-template-columns: 1fr; }
+    .left { display: none; }
+  }
+
+  /* Left sidebar */
+  .left {
+    position: sticky; top: 0; height: 100vh;
+    padding: 24px 16px;
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    overflow-y: auto;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; padding: 0 8px; }
+  .logo-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    display: grid; place-items: center; color: white;
+    font-size: 14px;
+  }
+  .logo-title { font-weight: 700; color: white; font-size: 14px; line-height: 1.2; }
+  .logo-sub { color: var(--muted-2); font-size: 11px; }
+  .nav { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+  .nav a {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 12px;
+    color: var(--muted); font-size: 14px; font-weight: 500;
+  }
+  .nav a:hover { background: rgba(255,255,255,0.05); color: white; text-decoration: none; }
+  .nav a.active { background: rgba(255,255,255,0.1); color: white; }
+  .nav-icon { width: 20px; height: 20px; display: inline-block; text-align: center; }
+  .new-post {
+    margin-top: 16px;
+    background: var(--blue); color: white;
+    padding: 10px 16px; border-radius: 999px;
+    text-align: center; font-weight: 600; font-size: 14px;
+    border: none; cursor: pointer;
+  }
+  .me {
+    margin-top: 16px; display: flex; align-items: center; gap: 12px;
+    padding: 8px; border-radius: 12px;
+  }
+
+  /* Main feed */
+  .main {
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    min-height: 100vh;
+  }
+  .feed-header {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(8,11,20,0.9);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 16px;
+    font-weight: 700; color: white; font-size: 18px;
+  }
+
+  /* About banner */
+  .about-banner {
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(135deg, rgba(49, 46, 129, 0.4), rgba(15, 23, 42, 0.6));
+    padding: 20px 16px 16px;
+  }
+  .about-head { display: flex; align-items: center; gap: 10px; }
+  .about-head .emoji { font-size: 26px; line-height: 1; }
+  .about-title { color: white; font-weight: 700; font-size: 16px; }
+  .about-sub { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .about-body p { font-size: 14px; color: #cbd5e1; line-height: 1.6; margin: 10px 0; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .pill {
+    font-size: 11px; padding: 4px 10px; border-radius: 999px;
+    background: rgba(255,255,255,0.08); color: #cbd5e1;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  /* Post card */
+  .post {
+    border-bottom: 1px solid var(--border);
+    padding: 16px;
+    display: flex; gap: 12px;
+    position: relative;
+  }
+  .post:hover { background: var(--card-hover); }
+  .avatar {
+    width: 40px; height: 40px; border-radius: 999px;
+    display: grid; place-items: center;
+    color: white; font-weight: 700; font-size: 13px;
+    flex-shrink: 0;
+  }
+  .avatar.sm { width: 32px; height: 32px; font-size: 11px; }
+  .avatar.indigo { background: var(--indigo); }
+  .avatar.purple { background: #A855F7; }
+  .avatar.blue { background: var(--blue); }
+  .avatar.emerald { background: #10B981; }
+  .avatar.rose { background: #F43F5E; }
+  .post-main { flex: 1; min-width: 0; }
+  .meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 13px; }
+  .name { font-weight: 700; color: white; }
+  .handle { color: var(--muted-2); }
+  .dot { color: var(--muted-3); font-size: 11px; }
+  .time { color: var(--muted-2); font-size: 12px; }
+  .topic-badge {
+    font-size: 11px; padding: 2px 8px; border-radius: 999px;
+    border: 1px solid; font-weight: 500;
+  }
+  .topic-Technology { background: rgba(30,58,138,0.4); color: #93C5FD; border-color: #1D4ED8; }
+  .topic-Legal { background: rgba(88,28,135,0.4); color: #D8B4FE; border-color: #7E22CE; }
+  .topic-Privacy { background: rgba(127,29,29,0.4); color: #FCA5A5; border-color: #B91C1C; }
+  .topic-Ethics { background: rgba(120,53,15,0.4); color: #FCD34D; border-color: #B45309; }
+  .topic-Strategy { background: rgba(20,83,45,0.4); color: #86EFAC; border-color: #15803D; }
+  .body {
+    margin-top: 8px;
+    color: #E2E8F0; font-size: 14px; line-height: 1.6;
+    white-space: pre-wrap; word-wrap: break-word;
+  }
+  .mention { color: var(--blue); }
+  .hashtag { color: var(--indigo); }
+
+  /* Media */
+  .media { margin-top: 12px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border); }
+  .media img { display: block; width: 100%; height: auto; }
+  .embed {
+    background: #000; aspect-ratio: 16/9;
+    display: grid; place-items: center;
+    color: var(--muted); font-size: 13px;
+  }
+  .embed a { color: var(--blue); }
+  .diagram {
+    background: linear-gradient(135deg, #0a0f1f, #0d1220);
+    padding: 24px; text-align: center;
+    color: var(--muted);
+    border: 1px dashed var(--border); border-radius: 12px;
+    margin-top: 12px;
+  }
+  .diagram .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted-2); }
+  .diagram .name { font-weight: 600; color: #cbd5e1; margin-top: 4px; }
+
+  /* Actions */
+  .actions {
+    display: flex; gap: 28px; margin-top: 12px;
+    color: var(--muted-2); font-size: 13px;
+  }
+  .action { display: inline-flex; align-items: center; gap: 6px; }
+
+  /* Replies */
+  .replies {
+    margin-top: 12px;
+    border-left: 2px solid var(--border);
+    padding-left: 12px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .reply { display: flex; gap: 10px; padding: 8px; border-radius: 12px; background: rgba(255,255,255,0.02); }
+  .reply .body { margin-top: 4px; font-size: 13px; }
+
+  /* Right panel */
+  .right { position: sticky; top: 0; height: 100vh; padding: 24px 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; }
+  .panel {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 16px;
+  }
+  .panel h3 {
+    margin: 0 0 12px; color: white; font-size: 14px; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .topic-list { list-style: none; margin: 0; padding: 0; }
+  .topic-list li a {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 8px; border-radius: 8px; color: #cbd5e1; font-size: 13px;
+  }
+  .topic-list li a:hover { background: rgba(255,255,255,0.05); text-decoration: none; color: white; }
+  .topic-dot { width: 8px; height: 8px; border-radius: 999px; display: inline-block; margin-right: 8px; }
+  .topic-dot.Technology { background: #60A5FA; }
+  .topic-dot.Legal { background: #C084FC; }
+  .topic-dot.Privacy { background: #F87171; }
+  .topic-dot.Ethics { background: #FBBF24; }
+  .topic-dot.Strategy { background: #4ADE80; }
+  .researchers { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+  .researchers li { display: flex; align-items: center; gap: 12px; }
+  .researcher-name { color: white; font-size: 13px; font-weight: 500; }
+  .researcher-handle { color: var(--muted-2); font-size: 11px; }
+  .about-panel p { font-size: 12px; color: #cbd5e1; line-height: 1.6; margin: 0 0 8px; }
+  .about-panel .by { color: var(--muted-2); font-size: 11px; }
+  .built-on {
+    margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border);
+  }
+  .built-on .h { color: var(--muted-2); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .built-on p { font-size: 11px; color: var(--muted); margin: 4px 0; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="left">
+    <div class="logo">
+      <div class="logo-icon">🤖</div>
+      <div>
+        <div class="logo-title">HelixWatch</div>
+        <div class="logo-sub">Privacy · AI · Robotics</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="#" class="active"><span class="nav-icon">🏠</span> Home</a>
+      <a href="#topic-Technology"><span class="nav-icon">💻</span> Technology</a>
+      <a href="#topic-Legal"><span class="nav-icon">⚖️</span> Legal</a>
+      <a href="#topic-Privacy"><span class="nav-icon">🛡️</span> Privacy</a>
+      <a href="#topic-Ethics"><span class="nav-icon">🧠</span> Ethics</a>
+      <a href="#topic-Strategy"><span class="nav-icon">📈</span> Strategy</a>
+      <a href="#about"><span class="nav-icon">ℹ️</span> About</a>
+    </nav>
+    <button class="new-post">✎ New Post</button>
+    <div class="me">
+      <div class="avatar sm indigo">EL</div>
+      <div>
+        <div style="color:white;font-size:13px;font-weight:500;">Eden Ledom</div>
+        <div style="color:var(--muted-2);font-size:11px;">@edenledom</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN FEED -->
+  <main class="main">
+    <div class="feed-header">Home</div>
+
+    <section class="about-banner" id="about">
+      <div class="about-head">
+        <span class="emoji">🤖</span>
+        <div>
+          <div class="about-title">HelixWatch</div>
+          <div class="about-sub">What happens to your privacy when robots go to work?</div>
+        </div>
+      </div>
+      <div class="about-body">
+        <p>Figure AI just deployed Helix 02, a humanoid robot that works alongside humans in warehouses, watching, learning, and collecting data 24/7. Nobody asked the workers if that was okay.</p>
+        <p>This blog is a research project exploring what that actually means for your privacy. We're four students — <span style="color:white;font-weight:500;">Eden, Orianne, Dan &amp; Shir</span> — who spent a semester digging into the legal gaps, the ethical questions, and what regulations (if any) can keep up with this technology.</p>
+        <div class="pills">
+          <span class="pill">#Technology</span>
+          <span class="pill">#Legal</span>
+          <span class="pill">#Privacy</span>
+          <span class="pill">#Ethics</span>
+          <span class="pill">#Strategy</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- POSTS (sorted newest first) -->
+
+    <!-- p17 - 30m - Ethics -->
+    <article class="post" id="topic-Ethics">
+      <div class="avatar emerald">SS</div>
+      <div class="post-main">
+        <div class="meta">
+          <span class="name">Shir Schipper</span>
+          <span class="handle">@shirschipper</span>
+          <span class="dot">·</span><span class="time">30m</span>
+          <span class="topic-badge topic-Ethics">Ethics</span>
+        </div>
+        <div class="body">When a humanoid robot is deployed at your workplace, can you truly consent to it?
+
+Think about what you're actually agreeing to:
+
+• A system that learns from you constantly
+• A workplace you didn't choose, the employer did
+• A paycheck that depends on you showing up anyway
+
+Saying no is technically an option. But 'no' means not showing up. And not showing up means losing your job.
+
+That's not informed consent. That's coercion with extra steps. Push back below 👇 <span class="mention">@edenledom</span> <span class="mention">@danvered</span></div>
+        <div class="embed">YouTube video · <a href="https://www.youtube.com/watch?v=ZFntEFXKDHM">ZFntEFXKDHM</a></div>
+        <div class="actions">
+          <span class="action">💬 3</span><span class="action">🔁 2</span><span class="action">❤️ 4</span><span class="action">🔖 3</span>
+        </div>
+        <div class="replies">
+          <div class="reply">
+            <div class="avatar sm indigo">EL</div>
+            <div><div class="meta"><span class="name">Eden Ledom</span><span class="handle">@edenledom</span></div>
+            <div class="body">There's a whole field of research on this. The more human the form, the more trust gets triggered, and the more people disclose. The design lowers people's guard. That's not an accident.</div></div>
+          </div>
+          <div class="reply">
+            <div class="avatar sm blue">DV</div>
+            <div><div class="meta"><span class="name">Dan Vered</span><span class="handle">@danvered</span></div>
+            <div class="body">Counter: technically, granular consent is possible. Opt out of training, allow functional use. The problem isn't the concept. It's implementing this in high-turnover warehouse environments where workers have zero leverage.</div></div>
+          </div>
+          <div class="reply">
+            <div class="avatar sm emerald">SS</div>
+            <div><div class="meta"><span class="name">Shir Schipper</span><span class="handle">@shirschipper</span></div>
+            <div class="body">Agree completely. Real consent requires the ability to say no without consequences. You can't say no to your employer's robot. The whole structure makes consent impossible before you even get to the legal question.</div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- p12 - 1h - Privacy -->
+    <article class="post" id="topic-Privacy">
+      <div class="avatar emerald">SS</div>
+      <div class="post-main">
+        <div class="meta">
+          <span class="name">Shir Schipper</span><span class="handle">@shirschipper</span>
+          <span class="dot">·</span><span class="time">1h</span>
+          <span class="topic-badge topic-Privacy">Privacy</span>
+        </div>
+        <div class="body">Being watched by a camera is one thing. Being watched by something that looks back at you is something else entirely.
+
+Ryan Calo identified three ways robots threaten privacy:
+
+• Direct surveillance: collecting data on you
+• Third-party data flows: that data moving somewhere you never agreed to
+• Social meaning: the psychological weight of being observed by something that feels human
+
+The third one is the hardest to prove in court. But for workers sharing a floor with Helix, it might be the most real. <span class="mention">@edenledom</span></div>
+        <div class="diagram"><div class="label">Diagram</div><div class="name">Calo Framework — Three privacy threats from robots</div></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 2</span><span class="action">❤️ 4</span><span class="action">🔖 3</span></div>
+      </div>
+    </article>
+
+    <!-- p2 - 2h - Technology -->
+    <article class="post" id="topic-Technology">
+      <div class="avatar blue">DV</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Dan Vered</span><span class="handle">@danvered</span><span class="dot">·</span><span class="time">2h</span><span class="topic-badge topic-Technology">Technology</span></div>
+        <div class="body">Every humanoid robot in the room is scanning you 20 times a second.
+
+Not passively recording. Actively processing, seeing the space, identifying people, planning its next move. All at once. Every second.
+
+Each time Helix picks up a box, steps around a person, or follows a command, a full AI model fires. It reads the room. Interprets the instruction. Calculates the movement. Then does it again.
+
+That's not a camera on a wall. That's continuous, real-time intelligence, with you in the frame. <span class="hashtag">#VLA</span> <span class="hashtag">#EmbodiedAI</span> <span class="mention">@helixwatch</span> <span class="mention">@shirschipper</span></div>
+        <div class="diagram"><div class="label">Diagram</div><div class="name">Helix Vision-Language-Action loop</div></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 2</span><span class="action">❤️ 4</span><span class="action">🔖 2</span></div>
+      </div>
+    </article>
+
+    <!-- p22 - 2h - Strategy -->
+    <article class="post" id="topic-Strategy">
+      <div class="avatar indigo">EL</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Eden Ledom</span><span class="handle">@edenledom</span><span class="dot">·</span><span class="time">2h</span><span class="topic-badge topic-Strategy">Strategy</span></div>
+        <div class="body">A semester of research led us here. This is the governance framework humanoid robots actually need.
+
+The law isn't keeping up. So we built a model that does.
+
+• Tier 1: Privacy by design baked into the hardware, before it hits the market. Not a checkbox. Architecture.
+• Tier 2: A data protection impact assessment required per sector, before any deployment.
+• Tier 3: Functional and training data treated as legally distinct, because they serve completely different purposes.
+• Tier 4: GDPR as the global floor, with US sector-specific rules layered on top.
+
+This is the gap between where the law is and where it has to be. <span class="mention">@oriblum</span> <span class="mention">@danvered</span> <span class="mention">@shirschipper</span></div>
+        <div class="diagram"><div class="label">Diagram</div><div class="name">Four-Tier Governance Model</div></div>
+        <div class="actions"><span class="action">💬 1</span><span class="action">🔁 3</span><span class="action">❤️ 4</span><span class="action">🔖 4</span></div>
+        <div class="replies">
+          <div class="reply">
+            <div class="avatar sm purple">OB</div>
+            <div><div class="meta"><span class="name">Orianne Blum</span><span class="handle">@oriblum</span></div>
+            <div class="body">Tier 3 is the technically tricky one, the line between functional and training data isn't always clean. The same gradient step that completes a task can also update model weights. Regulators will need real technical expertise to implement this properly.</div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- p7 - 3h - Legal -->
+    <article class="post" id="topic-Legal">
+      <div class="avatar purple">OB</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Orianne Blum</span><span class="handle">@oriblum</span><span class="dot">·</span><span class="time">3h</span><span class="topic-badge topic-Legal">Legal</span></div>
+        <div class="body">Nobody's protecting you from the robot in your warehouse. Not yet.
+
+Here's the honest state of US privacy law for humanoid robots:
+
+• FTC §5: only acts after you've already been harmed
+• BIPA: covers one state
+• CCPA: covers one state
+• Federal robotics framework: doesn't exist
+
+A robot walks onto your floor, scans your face, maps your movements, logs your behavior. The law has nothing to say about it. <span class="mention">@edenledom</span> <span class="mention">@danvered</span></div>
+        <div class="diagram"><div class="label">Slides</div><div class="name">Legal landscape — US privacy law gaps</div></div>
+        <div class="actions"><span class="action">💬 1</span><span class="action">🔁 2</span><span class="action">❤️ 4</span><span class="action">🔖 2</span></div>
+        <div class="replies">
+          <div class="reply">
+            <div class="avatar sm indigo">EL</div>
+            <div><div class="meta"><span class="name">Eden Ledom</span><span class="handle">@edenledom</span></div>
+            <div class="body">Worth knowing: industry is already lobbying for federal preemption. A weak federal law could override stronger state laws like BIPA. They know the exposure. They're playing offense.</div></div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- p1 - 4h - Technology -->
+    <article class="post">
+      <div class="avatar rose">HW</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Helix Watch</span><span class="handle">@helixwatch</span><span class="dot">·</span><span class="time">4h</span><span class="topic-badge topic-Technology">Technology</span></div>
+        <div class="body">Most people have no idea what Helix 02 is actually doing when it's standing next to them.
+
+The technical papers exist. But they're written for engineers, not for the rest of us.
+
+So here it is, broken down in plain English, step by step. Replies below 👇 <span class="hashtag">#HelixWatch</span></div>
+        <div class="media"><img src="public/images/p1.png" alt="Humanoid robot scanning workers in warehouse" /></div>
+        <div class="actions"><span class="action">💬 3</span><span class="action">🔁 1</span><span class="action">❤️ 3</span><span class="action">🔖 3</span></div>
+        <div class="replies">
+          <div class="reply"><div class="avatar sm indigo">EL</div><div><div class="meta"><span class="name">Eden Ledom</span><span class="handle">@edenledom</span></div><div class="body">Step 1: RGB cameras and depth sensors build a live 3D map of the entire workspace, ~20 times a second. Every person in range, whether they're interacting with the robot or just walking past, is in every single frame.</div></div></div>
+          <div class="reply"><div class="avatar sm purple">OB</div><div><div class="meta"><span class="name">Orianne Blum</span><span class="handle">@oriblum</span></div><div class="body">Step 2: vision, audio, and physical sensor data all get compressed into one AI representation. Faces, the way you walk, your voice, encoded together. Not as separate data points. As one unified model of you.</div></div></div>
+          <div class="reply"><div class="avatar sm emerald">SS</div><div><div class="meta"><span class="name">Shir Schipper</span><span class="handle">@shirschipper</span></div><div class="body">Step 3: some of that goes to the action controller, what Helix does next (functional, should be discarded immediately). Some feeds back into model training, making future versions smarter (needs consent). Helix doesn't separate them. That's the entire problem.</div></div></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- p13 - 5h - Privacy -->
+    <article class="post">
+      <div class="avatar emerald">SS</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Shir Schipper</span><span class="handle">@shirschipper</span><span class="dot">·</span><span class="time">5h</span><span class="topic-badge topic-Privacy">Privacy</span></div>
+        <div class="body">Workers didn't sign up for this.
+
+The 'privacy paradox' says people claim to care about privacy but don't act like it. Researchers love that framing, it puts the burden back on the individual.
+
+But it only holds when people actually have a choice. Workers sharing a warehouse with Helix never opted into anything. They showed up to do a job.
+
+Not showing up for your shift isn't consent.</div>
+        <div class="diagram"><div class="label">Slides</div><div class="name">Privacy paradox vs. workplace coercion</div></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 1</span><span class="action">❤️ 3</span><span class="action">🔖 1</span></div>
+      </div>
+    </article>
+
+    <!-- p8 - 6h - Legal -->
+    <article class="post">
+      <div class="avatar purple">OB</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Orianne Blum</span><span class="handle">@oriblum</span><span class="dot">·</span><span class="time">6h</span><span class="topic-badge topic-Legal">Legal</span></div>
+        <div class="body">Same robot. Two completely different legal realities.
+
+In Europe, privacy-by-design is the law. Article 25 of the GDPR requires it before a single humanoid robot is deployed.
+
+In the US? The NIST Privacy Framework is the closest equivalent, but it's voluntary. A suggestion on paper, not a mandate in court.
+
+• Europe: build privacy in from day one, or face legal consequences
+• US: build privacy in if you feel like it
+
+The robot is identical. The accountability is not.</div>
+        <div class="diagram"><div class="label">Diagram</div><div class="name">EU vs. US — Legal Comparison</div></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 1</span><span class="action">❤️ 3</span><span class="action">🔖 2</span></div>
+      </div>
+    </article>
+
+    <!-- p18 - 7h - Ethics -->
+    <article class="post">
+      <div class="avatar indigo">EL</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Eden Ledom</span><span class="handle">@edenledom</span><span class="dot">·</span><span class="time">7h</span><span class="topic-badge topic-Ethics">Ethics</span></div>
+        <div class="body">Consent for ambient AI isn't just a legal problem, it's a design problem.
+
+Most consent frameworks were built for a world where you click 'agree' and move on. Humanoid robots break that model entirely.
+
+• It learns from you in real time, your behavior is the data
+• It sends inferences upstream before you know what's been inferred
+• It keeps running after you leave the room
+• It operates in spaces you can't simply walk away from
+
+We don't have a 'close the tab' option for the physical world.</div>
+        <div class="embed">YouTube video · <a href="https://www.youtube.com/watch?v=DH8wCgwL_1U">DH8wCgwL_1U</a></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 2</span><span class="action">❤️ 3</span><span class="action">🔖 2</span></div>
+      </div>
+    </article>
+
+    <!-- p3 - 8h - Technology -->
+    <article class="post">
+      <div class="avatar blue">DV</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Dan Vered</span><span class="handle">@danvered</span><span class="dot">·</span><span class="time">8h</span><span class="topic-badge topic-Technology">Technology</span></div>
+        <div class="body">Every worker near a humanoid robot is quietly becoming training data.
+
+Figure AI's CEO Brett Adcock said it plainly at Boao Forum 2026: "humans working alongside Helix are effectively contributing to its training dataset."
+
+No consent form. No opt-out. No disclosed retention period.
+
+Just stated it like it was the most natural thing in the world.</div>
+        <div class="media"><img src="public/images/p3.png" alt="Tech CEO presenting humanoid robot at conference" /></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 2</span><span class="action">❤️ 4</span><span class="action">🔖 2</span></div>
+      </div>
+    </article>
+
+    <!-- p23 - 9h - Strategy -->
+    <article class="post">
+      <div class="avatar purple">OB</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Orianne Blum</span><span class="handle">@oriblum</span><span class="dot">·</span><span class="time">9h</span><span class="topic-badge topic-Strategy">Strategy</span></div>
+        <div class="body">GDPR doesn't win because it's right. It wins because the money gets too big to ignore.
+
+Figure AI wants the EU market. The EU has the GDPR and the AI Act. Build to those standards and you're covered everywhere else by default.
+
+• Regulatory arbitrage works, until the revenue at stake makes it too dangerous
+• The EU market is too large to walk away from
+• So compliance becomes the path of least resistance
+
+This isn't idealism. It's market logic. GDPR wins by default, not because it should, but because Figure AI can't afford for it not to.</div>
+        <div class="diagram"><div class="label">Slides</div><div class="name">Regulation as market gravity</div></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 1</span><span class="action">❤️ 3</span><span class="action">🔖 2</span></div>
+      </div>
+    </article>
+
+    <!-- p14 - 10h - Privacy -->
+    <article class="post">
+      <div class="avatar indigo">EL</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Eden Ledom</span><span class="handle">@edenledom</span><span class="dot">·</span><span class="time">10h</span><span class="topic-badge topic-Privacy">Privacy</span></div>
+        <div class="body">A security camera is fixed. A humanoid robot follows you.
+
+So why does that difference actually matter legally? Why is Helix a bigger privacy problem than a CCTV on the wall?
+
+It's not as obvious as it sounds. <span class="mention">@shirschipper</span> <span class="mention">@danvered</span> <span class="mention">@oriblum</span>, weigh in below 👇</div>
+        <div class="media"><img src="public/images/p14.png" alt="Humanoid robot facing human worker in corridor" /></div>
+        <div class="actions"><span class="action">💬 3</span><span class="action">🔁 1</span><span class="action">❤️ 3</span><span class="action">🔖 2</span></div>
+        <div class="replies">
+          <div class="reply"><div class="avatar sm emerald">SS</div><div><div class="meta"><span class="name">Shir Schipper</span><span class="handle">@shirschipper</span></div><div class="body">A fixed camera has a field of view you can see and usually avoid. Helix follows you. It turns toward you. It treats you as the subject of its attention, not background context.</div></div></div>
+          <div class="reply"><div class="avatar sm blue">DV</div><div><div class="meta"><span class="name">Dan Vered</span><span class="handle">@danvered</span></div><div class="body">When Helix turns to face you, your brain reads it as attention, judgment, even. Studies show people have measurably higher stress responses to humanoid observers than to fixed cameras. The face changes everything.</div></div></div>
+          <div class="reply"><div class="avatar sm purple">OB</div><div><div class="meta"><span class="name">Orianne Blum</span><span class="handle">@oriblum</span></div><div class="body">HRI research (Breazeal, Darling and others) shows people share significantly more personal information with humanoid robots than with screens. The perceived empathy is real. And it's exactly what makes it a privacy vulnerability.</div></div></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- p19 - 11h - Ethics -->
+    <article class="post">
+      <div class="avatar blue">DV</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Dan Vered</span><span class="handle">@danvered</span><span class="dot">·</span><span class="time">11h</span><span class="topic-badge topic-Ethics">Ethics</span></div>
+        <div class="body">Every shift you work next to Helix, your movements and habits become training data owned by Figure AI, used to build the next version smarter.
+
+Without telling you. Without paying you for it.
+
+You're not the customer. You're not even just the employee anymore.
+
+You're the dataset. <span class="mention">@shirschipper</span> <span class="mention">@edenledom</span></div>
+        <div class="media"><img src="public/images/p19.png" alt="Warehouse workers alongside autonomous robots" /></div>
+        <div class="actions"><span class="action">💬 1</span><span class="action">🔁 2</span><span class="action">❤️ 4</span><span class="action">🔖 2</span></div>
+        <div class="replies">
+          <div class="reply"><div class="avatar sm purple">OB</div><div><div class="meta"><span class="name">Orianne Blum</span><span class="handle">@oriblum</span></div><div class="body">There's a labor law angle here too, especially in the EU. If workers' behavioral data generates commercial value for the employer, there may eventually be a right to information and compensation. Untested in robotics. But the argument is building.</div></div></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- p9 - 12h - Legal -->
+    <article class="post">
+      <div class="avatar indigo">EL</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Eden Ledom</span><span class="handle">@edenledom</span><span class="dot">·</span><span class="time">12h</span><span class="topic-badge topic-Legal">Legal</span></div>
+        <div class="body">Nobody is talking about this legal gap, and they should be.
+
+Product liability law was built for things that physically break. Data protection law was built for digital data processing.
+
+A humanoid robot that silently profiles workers might not violate either. That's not a loophole. That's a structural blind spot baked into the law itself.
+
+We've been documenting exactly this with <span class="mention">@oriblum</span>.</div>
+        <div class="embed">YouTube video · <a href="https://www.youtube.com/watch?v=Nc7hnPpbhyI">Nc7hnPpbhyI</a></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 2</span><span class="action">❤️ 3</span><span class="action">🔖 2</span></div>
+      </div>
+    </article>
+
+    <!-- p4 - 14h - Technology -->
+    <article class="post">
+      <div class="avatar indigo">EL</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Eden Ledom</span><span class="handle">@edenledom</span><span class="dot">·</span><span class="time">14h</span><span class="topic-badge topic-Technology">Technology</span></div>
+        <div class="body">Helix is collecting two very different types of data, and treating them like they're the same thing.
+
+Functional data gets used in the moment, then should be deleted. Training data gets retained to make future versions smarter, and that requires informed consent.
+
+Right now, both flow through the exact same pipeline. No legal distinction. No separation. No consent framework for the data that actually sticks around.
+
+This isn't a minor oversight. It's a foundational problem. <span class="mention">@oriblum</span></div>
+        <div class="diagram"><div class="label">Diagram</div><div class="name">Data Flow — functional vs. training</div></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 1</span><span class="action">❤️ 3</span><span class="action">🔖 2</span></div>
+      </div>
+    </article>
+
+    <!-- p20 - 16h - Ethics -->
+    <article class="post">
+      <div class="avatar purple">OB</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Orianne Blum</span><span class="handle">@oriblum</span><span class="dot">·</span><span class="time">16h</span><span class="topic-badge topic-Ethics">Ethics</span></div>
+        <div class="body">Humanoid robots don't just see you, they study you.
+
+The same sensor stream that lets Helix hand you a package is capable of far more:
+
+• Infer your emotional state from your face
+• Detect health patterns in the way you walk
+• Map social connections from who stands near who
+• Build a behavioral profile no one ever consented to
+
+This isn't a future risk. The technology already does this. Data minimization for humanoid robots isn't optional. It's urgent.</div>
+        <div class="media"><img src="public/images/p20.png" alt="Human body with sensor data streams visualization" /></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 2</span><span class="action">❤️ 3</span><span class="action">🔖 2</span></div>
+      </div>
+    </article>
+
+    <!-- p15 - 18h - Privacy -->
+    <article class="post">
+      <div class="avatar rose">HW</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Helix Watch</span><span class="handle">@helixwatch</span><span class="dot">·</span><span class="time">18h</span><span class="topic-badge topic-Privacy">Privacy</span></div>
+        <div class="body">We read every piece of Figure AI's public documentation cover to cover. We were looking for basic privacy protections, the kind any responsible data company should have.
+
+• On-device processing requirements
+• Face and voice anonymization
+• Worker data audit trail
+• Consent logging
+• Data retention schedules
+• An opt-out mechanism
+
+Found zero. Not one mention. Not even a roadmap. <span class="mention">@shirschipper</span></div>
+        <div class="media"><img src="public/images/p15.png" alt="Digital security shield with privacy checklist" /></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 3</span><span class="action">❤️ 4</span><span class="action">🔖 3</span></div>
+      </div>
+    </article>
+
+    <!-- p5 - 1d - Technology -->
+    <article class="post">
+      <div class="avatar rose">HW</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Helix Watch</span><span class="handle">@helixwatch</span><span class="dot">·</span><span class="time">1d</span><span class="topic-badge topic-Technology">Technology</span></div>
+        <div class="body">Every time Helix steps around you, it's studying you.
+
+Watch the demo closely. Each navigation decision the robot makes around a human isn't just movement, it's biometric data being logged in real time. Your gait, your posture, the space you take up. All of it. <span class="mention">@danvered</span></div>
+        <div class="embed">YouTube video · <a href="https://www.youtube.com/watch?v=Z3yQHYNXPws">Z3yQHYNXPws</a></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 2</span><span class="action">❤️ 3</span><span class="action">🔖 1</span></div>
+      </div>
+    </article>
+
+    <!-- p10 - 1d - Legal -->
+    <article class="post">
+      <div class="avatar purple">OB</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Orianne Blum</span><span class="handle">@oriblum</span><span class="dot">·</span><span class="time">1d</span><span class="topic-badge topic-Legal">Legal</span></div>
+        <div class="body">Illinois BIPA is the law Figure AI should be losing sleep over.
+
+• $1,000 per careless violation
+• $5,000 per intentional one
+• Anyone can sue, no regulator needed
+• No proof of actual harm required
+
+Figure AI's primary market is warehouses. Illinois has a lot of warehouses. Someone's going to do this math eventually.</div>
+        <div class="media"><img src="public/images/p10.png" alt="Biometric fingerprint scanner with Illinois BIPA document" /></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 1</span><span class="action">❤️ 3</span><span class="action">🔖 1</span></div>
+      </div>
+    </article>
+
+    <!-- p24 - 1d - Strategy -->
+    <article class="post">
+      <div class="avatar indigo">EL</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Eden Ledom</span><span class="handle">@edenledom</span><span class="dot">·</span><span class="time">1d</span><span class="topic-badge topic-Strategy">Strategy</span></div>
+        <div class="body">Privacy-by-design isn't just a compliance checkbox. It's a growth strategy.
+
+Here's what robotics companies are leaving on the table by ignoring it:
+
+• Enterprise customers close faster when they trust how worker data is handled
+• EU DPA approval unlocks a massive market competitors can't touch
+• Real consent frameworks are a legal shield against labor litigation before it starts
+• Transparency is a genuine differentiator, most players in this space simply won't go there
+
+Figure AI, the window to lead on this is open. Just publish the data governance white paper. <span class="mention">@helixwatch</span> <span class="mention">@danvered</span></div>
+        <div class="media"><img src="public/images/p24.png" alt="Business meeting with privacy strategy whitepaper" /></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 2</span><span class="action">❤️ 3</span><span class="action">🔖 2</span></div>
+      </div>
+    </article>
+
+    <!-- p6 - 2d - Technology -->
+    <article class="post">
+      <div class="avatar blue">DV</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Dan Vered</span><span class="handle">@danvered</span><span class="dot">·</span><span class="time">2d</span><span class="topic-badge topic-Technology">Technology</span></div>
+        <div class="body">Every humanoid robot company makes choices about your data. Some just hide them better.
+
+Tesla Optimus at least mentions opt-in consent in the purchase agreement, buried, but it's there.
+
+Figure Helix 02? No published data governance framework at all.
+
+• Tesla Optimus: opt-in consent referenced in the purchase agreement
+• Figure Helix 02: zero published data governance framework
+
+That gap isn't an oversight. It's a decision. <span class="mention">@oriblum</span> <span class="mention">@edenledom</span></div>
+        <div class="diagram"><div class="label">Diagram</div><div class="name">Risk Matrix — vendor comparison</div></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 2</span><span class="action">❤️ 3</span><span class="action">🔖 2</span></div>
+      </div>
+    </article>
+
+    <!-- p16 - 2d - Privacy -->
+    <article class="post">
+      <div class="avatar emerald">SS</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Shir Schipper</span><span class="handle">@shirschipper</span><span class="dot">·</span><span class="time">2d</span><span class="topic-badge topic-Privacy">Privacy</span></div>
+        <div class="body">The panopticon made people behave differently because they might be watched.
+
+Helix removes the 'might.'
+
+Workers know it's watching. Every shift. Every conversation. Every movement near the machine. And that certainty changes how they talk, how they move, what they're willing to say out loud.
+
+The harm isn't a future data breach. The harm is already happening, in every behavior quietly modified to accommodate a robot in the room.</div>
+        <div class="media"><img src="public/images/p16.png" alt="Surveillance camera watching worker in warehouse" /></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 1</span><span class="action">❤️ 3</span><span class="action">🔖 2</span></div>
+      </div>
+    </article>
+
+    <!-- p11 - 3d - Legal -->
+    <article class="post">
+      <div class="avatar rose">HW</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Helix Watch</span><span class="handle">@helixwatch</span><span class="dot">·</span><span class="time">3d</span><span class="topic-badge topic-Legal">Legal</span></div>
+        <div class="body">Can a company hide behind 'legitimate interests' to collect biometric data from workers who have no real choice in the matter?
+
+<span class="mention">@oriblum</span> breaks it down 👇</div>
+        <div class="media"><img src="public/images/p11.png" alt="GDPR scales of justice digital interface" /></div>
+        <div class="actions"><span class="action">💬 2</span><span class="action">🔁 0</span><span class="action">❤️ 3</span><span class="action">🔖 1</span></div>
+        <div class="replies">
+          <div class="reply"><div class="avatar sm purple">OB</div><div><div class="meta"><span class="name">Orianne Blum</span><span class="handle">@oriblum</span></div><div class="body">Short answer: no. Article 6(1)(f) requires balancing the controller's interests against the data subject's rights. Workers who have no meaningful choice fail that test automatically.</div></div></div>
+          <div class="reply"><div class="avatar sm blue">DV</div><div><div class="meta"><span class="name">Dan Vered</span><span class="handle">@danvered</span></div><div class="body">And before you even get to legitimate interests, biometric data used for identification triggers Article 9 special category protections. 'Legitimate interests' can't override Article 9. You need explicit consent. End of argument.</div></div></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- p21 - 4d - Ethics -->
+    <article class="post">
+      <div class="avatar emerald">SS</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Shir Schipper</span><span class="handle">@shirschipper</span><span class="dot">·</span><span class="time">4d</span><span class="topic-badge topic-Ethics">Ethics</span></div>
+        <div class="body">Nobody talks about the gap between ethics and engineering in robotics nearly enough.
+
+ACM's Code of Ethics has had a simple directive since 1992: respect privacy.
+
+That principle hasn't changed. But the architecture it was written for looks nothing like what we're deploying today. A humanoid robot with full-body continuous biometric sensing isn't a desktop computer. It's something else entirely.
+
+The principle still holds. The architecture doesn't. Nobody has resolved that tension yet.</div>
+        <div class="media"><img src="public/images/p21.png" alt="Robot and human with ACM Code of Ethics" /></div>
+        <div class="actions"><span class="action">💬 0</span><span class="action">🔁 0</span><span class="action">❤️ 3</span><span class="action">🔖 2</span></div>
+      </div>
+    </article>
+
+    <!-- p25 - 5d - Strategy -->
+    <article class="post">
+      <div class="avatar blue">DV</div>
+      <div class="post-main">
+        <div class="meta"><span class="name">Dan Vered</span><span class="handle">@danvered</span><span class="dot">·</span><span class="time">5d</span><span class="topic-badge topic-Strategy">Strategy</span></div>
+        <div class="body">Separating functional data from training data isn't just a technical distinction, it's the most urgent regulatory gap in embodied AI right now.
+
+Without it, everything defaults to product telemetry law. A framework built for faulty brake pads. Not for robots that observe, remember, and learn from your behavior.
+
+Without this legal separation:
+
+• Behavioral profiling gets treated like sensor diagnostics
+• There's no meaningful limit on how long training data can be kept
+• Developers have little incentive to draw the line themselves
+
+The law needs to catch up, and it needs to start with the right definitions.</div>
+        <div class="diagram"><div class="label">Diagram</div><div class="name">Timeline — embodied AI regulation</div></div>
+        <div class="actions"><span class="action">💬 2</span><span class="action">🔁 3</span><span class="action">❤️ 4</span><span class="action">🔖 4</span></div>
+        <div class="replies">
+          <div class="reply"><div class="avatar sm indigo">EL</div><div><div class="meta"><span class="name">Eden Ledom</span><span class="handle">@edenledom</span></div><div class="body">This is the core of our paper. Without the functional/training distinction, all humanoid robot data gets treated under product liability law, a framework designed for faulty brake pads, not behavioral profiling. The gap is definitional.</div></div></div>
+          <div class="reply"><div class="avatar sm emerald">SS</div><div><div class="meta"><span class="name">Shir Schipper</span><span class="handle">@shirschipper</span></div><div class="body">And it's doable right now. On-device processing with explicit training consent flags. Apple's differential privacy work is a real starting point for the architecture.</div></div></div>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- RIGHT PANEL -->
+  <aside class="right">
+    <section class="panel">
+      <h3>📈 Topics</h3>
+      <ul class="topic-list">
+        <li><a href="#topic-Technology"><span><span class="topic-dot Technology"></span>Technology</span><span style="color:var(--muted-2);font-size:11px;">6 posts</span></a></li>
+        <li><a href="#topic-Legal"><span><span class="topic-dot Legal"></span>Legal</span><span style="color:var(--muted-2);font-size:11px;">5 posts</span></a></li>
+        <li><a href="#topic-Privacy"><span><span class="topic-dot Privacy"></span>Privacy</span><span style="color:var(--muted-2);font-size:11px;">5 posts</span></a></li>
+        <li><a href="#topic-Ethics"><span><span class="topic-dot Ethics"></span>Ethics</span><span style="color:var(--muted-2);font-size:11px;">5 posts</span></a></li>
+        <li><a href="#topic-Strategy"><span><span class="topic-dot Strategy"></span>Strategy</span><span style="color:var(--muted-2);font-size:11px;">4 posts</span></a></li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h3>👥 Researchers</h3>
+      <ul class="researchers">
+        <li><div class="avatar sm purple">OB</div><div><div class="researcher-name">Orianne Blum</div><div class="researcher-handle">@oriblum</div></div></li>
+        <li><div class="avatar sm blue">DV</div><div><div class="researcher-name">Dan Vered</div><div class="researcher-handle">@danvered</div></div></li>
+        <li><div class="avatar sm emerald">SS</div><div><div class="researcher-name">Shir Schipper</div><div class="researcher-handle">@shirschipper</div></div></li>
+      </ul>
+    </section>
+
+    <section class="panel about-panel">
+      <h3>📖 About this project</h3>
+      <p>A semester-long research deep-dive into what humanoid robots like Figure AI's Helix mean for worker privacy, and whether the law is anywhere close to ready.</p>
+      <p class="by">By Eden, Orianne, Dan &amp; Shir · Group 8</p>
+      <div class="built-on">
+        <div class="h">Built on</div>
+        <p>Calo, R. (2010). Robots and Privacy.</p>
+        <p>Figure AI. (2026). Helix 02.</p>
+        <p>EU AI Act · GDPR Art. 25</p>
+      </div>
+    </section>
+  </aside>
+
+</div>
+</body>
+</html>
