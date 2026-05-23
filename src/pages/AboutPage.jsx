@@ -19,6 +19,7 @@ const REFS = [
   {
     short: "Calo (2012)",
     full: "Calo, R. (2012). Robots and Privacy. In P. Lin, K. Abney, & G. A. Bekey (Eds.), Robot Ethics: The Ethical and Social Implications of Robotics (pp. 187–201). MIT Press.",
+    url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1599189",
   },
   {
     short: "EDPS (2016)",
