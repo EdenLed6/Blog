@@ -1,7 +1,6 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   Cpu, Scale, ShieldAlert, Brain, TrendingUp, PenSquare, Bot, Home,
-  ChevronLeft, ChevronRight,
 } from "lucide-react";
 import Avatar from "../ui/Avatar.jsx";
 import { useApp } from "../../context/AppContext.jsx";
@@ -24,13 +23,15 @@ export default function LeftSidebar({ onNewPost, collapsed, onToggleCollapsed })
         collapsed ? "px-2" : "px-4"
       }`}
     >
-      {/* Logo, clickable to home */}
-      <Link
-        to="/"
-        className={`flex items-center gap-2.5 mb-8 rounded-xl hover:bg-white/5 transition-colors py-1 ${
+      {/* Logo doubles as collapse/expand toggle */}
+      <button
+        type="button"
+        onClick={onToggleCollapsed}
+        aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        className={`flex items-center gap-2.5 mb-8 rounded-xl hover:bg-white/5 transition-colors py-1 text-left ${
           collapsed ? "justify-center px-1" : "justify-start px-2"
         }`}
-        aria-label="HelixWatch home"
       >
         <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent-blue to-accent-purple flex items-center justify-center flex-shrink-0">
           <Bot size={18} className="text-white" />
@@ -41,7 +42,7 @@ export default function LeftSidebar({ onNewPost, collapsed, onToggleCollapsed })
             <span className="text-slate-500 text-xs">Privacy · AI · Robotics</span>
           </div>
         )}
-      </Link>
+      </button>
 
       {/* Navigation */}
       <nav className="flex-1 space-y-1">
@@ -84,23 +85,6 @@ export default function LeftSidebar({ onNewPost, collapsed, onToggleCollapsed })
       >
         <PenSquare size={18} className="flex-shrink-0" />
         {!collapsed && <span>New Post</span>}
-      </button>
-
-      {/* Collapse toggle */}
-      <button
-        onClick={onToggleCollapsed}
-        aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-        title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-        className="mt-2 flex items-center justify-center gap-1.5 w-full py-2 rounded-lg text-slate-500 hover:text-white hover:bg-white/5 transition-colors text-xs"
-      >
-        {collapsed ? (
-          <ChevronRight size={16} />
-        ) : (
-          <>
-            <ChevronLeft size={14} />
-            <span>Collapse</span>
-          </>
-        )}
       </button>
 
       {/* Current user badge */}
