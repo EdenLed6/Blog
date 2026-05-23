@@ -6,7 +6,6 @@ import PostMedia from "./PostMedia.jsx";
 import PostActions from "./PostActions.jsx";
 import ReplyThread from "./ReplyThread.jsx";
 import { useApp } from "../../context/AppContext.jsx";
-import { formatTimestamp } from "../../utils/helpers.js";
 
 function parseBody(body, userMap) {
   const parts = body.split(/(@\w+|#\w+)/g);
@@ -61,8 +60,6 @@ const PostCard = memo(function PostCard({ post, expandReplies = false }) {
           <div className="flex items-center gap-1.5 flex-wrap">
             <span className="font-bold text-white text-sm">{author.name}</span>
             <span className="text-slate-500 text-sm">@{author.handle}</span>
-            <span className="text-slate-700 text-xs">·</span>
-            <span className="text-slate-500 text-xs">{formatTimestamp(post.createdAt)}</span>
             <TopicBadge topic={post.topic} size="xs" />
           </div>
 

@@ -1,7 +1,6 @@
 import { Heart } from "lucide-react";
 import Avatar from "../ui/Avatar.jsx";
 import { useApp } from "../../context/AppContext.jsx";
-import { formatTimestamp } from "../../utils/helpers.js";
 
 export default function ReplyCard({ reply }) {
   const { userMap, currentUser, likeReply } = useApp();
@@ -16,8 +15,6 @@ export default function ReplyCard({ reply }) {
         <div className="flex items-center gap-1.5 flex-wrap">
           <span className="text-sm font-semibold text-white">{author.name}</span>
           <span className="text-xs text-slate-500">@{author.handle}</span>
-          <span className="text-slate-600 text-xs">·</span>
-          <span className="text-xs text-slate-500">{formatTimestamp(reply.createdAt)}</span>
         </div>
         <p className="text-sm text-slate-300 mt-0.5 leading-relaxed">{reply.body}</p>
         <button

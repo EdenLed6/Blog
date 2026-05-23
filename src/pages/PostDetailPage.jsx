@@ -7,7 +7,6 @@ import PostActions from "../components/feed/PostActions.jsx";
 import ReplyCard from "../components/feed/ReplyCard.jsx";
 import ReplyComposer from "../components/composer/ReplyComposer.jsx";
 import { useApp } from "../context/AppContext.jsx";
-import { formatTimestamp } from "../utils/helpers.js";
 
 function parseBody(body, userMap) {
   const parts = body.split(/(@\w+|#\w+)/g);
@@ -87,17 +86,7 @@ export default function PostDetailPage() {
 
         <PostMedia media={post.media} />
 
-        <div className="mt-3 flex items-center gap-2">
-          <span className="text-slate-500 text-sm">
-            {new Date(post.createdAt).toLocaleString("en-US", {
-              month: "short",
-              day: "numeric",
-              year: "numeric",
-              hour: "numeric",
-              minute: "2-digit",
-            })}
-          </span>
-          <span className="text-slate-600">·</span>
+        <div className="mt-3">
           <TopicBadge topic={post.topic} />
         </div>
 
