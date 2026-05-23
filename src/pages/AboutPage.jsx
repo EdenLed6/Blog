@@ -1,10 +1,11 @@
 import { Bot, Users, BookOpen, ExternalLink, Sparkles } from "lucide-react";
 
 const TEAM = [
-  { name: "Eden Ledom", handle: "edenledom", initials: "EL", color: "bg-indigo-500", role: "Technology and strategic analysis" },
+  { name: "Eden Ledom", handle: "edenledom", initials: "EL", color: "bg-indigo-500", role: "Strategy and governance" },
   { name: "Orianne Blum", handle: "oriblum", initials: "OB", color: "bg-purple-500", role: "Legal and regulatory analysis" },
-  { name: "Dan Vered", handle: "danvered", initials: "DV", color: "bg-blue-500", role: "Technical architecture and AI systems analysis" },
-  { name: "Shir Schipper", handle: "shirschipper", initials: "SS", color: "bg-emerald-500", role: "Ethics and privacy analysis" },
+  { name: "Dan Vered", handle: "danvered", initials: "DV", color: "bg-blue-500", role: "Technology and AI architecture" },
+  { name: "Shir Schipper", handle: "shirschipper", initials: "SS", color: "bg-emerald-500", role: "Ethics and consent frameworks" },
+  { name: "Amir Unikovski", handle: "amirunikovski", initials: "AU", color: "bg-amber-500", role: "Privacy and data governance" },
 ];
 
 const TOPICS = [

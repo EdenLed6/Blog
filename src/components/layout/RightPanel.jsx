@@ -6,7 +6,7 @@ import { useApp } from "../../context/AppContext.jsx";
 import { TOPIC_CONFIG, TOPICS } from "../../utils/helpers.js";
 
 export default function RightPanel() {
-  const { posts, userMap, currentUser } = useApp();
+  const { posts, userMap } = useApp();
 
   const topicCounts = useMemo(() => {
     const counts = {};
@@ -16,8 +16,9 @@ export default function RightPanel() {
   }, [posts]);
 
   const suggestedUsers = useMemo(() => {
-    return Object.values(userMap).filter((u) => u.id !== currentUser?.id).slice(0, 3);
-  }, [userMap, currentUser]);
+    // Show the human researchers behind the project (exclude the HelixWatch bot account).
+    return Object.values(userMap).filter((u) => u.handle !== "helixwatch");
+  }, [userMap]);
 
   return (
     <aside className="sticky top-0 h-screen py-6 px-4 overflow-y-auto space-y-6 hidden lg:block">
@@ -77,7 +78,7 @@ export default function RightPanel() {
           A semester-long research deep-dive into what humanoid robots like Figure AI's Helix mean for worker privacy, and whether the law is anywhere close to ready.
         </p>
         <p className="text-xs text-slate-500 mt-2">
-          By Eden, Orianne, Dan & Shir · Group 8
+          By Eden, Orianne, Dan, Shir & Amir · Group 8
         </p>
         <div className="mt-3 pt-3 border-t border-border space-y-1.5">
           <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">Built on</p>
