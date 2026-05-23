@@ -1,6 +1,6 @@
 // Regulatory & Industry Timeline, Robotics Privacy
 const events = [
-  { year: "2008", title: "Illinois BIPA", desc: "First biometric privacy law in the US, $1–5K per violation", type: "law" },
+  { year: "2008", title: "Illinois BIPA", desc: "First biometric privacy law in the US, $1-5K per violation", type: "law" },
   { year: "2018", title: "GDPR Effective", desc: "EU comprehensive data protection, Art. 25 mandates privacy by design", type: "law" },
   { year: "2019", title: "EU AI Ethics", desc: "EU High-Level Expert Group publishes Ethics Guidelines for Trustworthy AI", type: "policy" },
   { year: "2021", title: "EU AI Act Draft", desc: "European Commission proposes risk-based AI regulation framework", type: "law" },
