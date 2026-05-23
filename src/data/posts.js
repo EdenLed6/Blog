@@ -64,7 +64,7 @@ export const SEED_REPLIES = [
   {
     id: "r6",
     postId: "p11",
-    authorId: "u3",
+    authorId: "u6",
     body: "Biometric data used for identification triggers Article 9 special-category rules. \"Legitimate interests\" can't override Article 9. You need explicit consent. End of argument.",
     likes: ["u2", "u4"],
     createdAt: now - 2 * d,
@@ -130,7 +130,7 @@ export const SEED_REPLIES = [
   {
     id: "r14",
     postId: "p22",
-    authorId: "u2",
+    authorId: "u6",
     body: "Separating \"what runs the shift\" from \"what trains the model\" is technically hard, but essential. Without that line, every shift becomes a free data source.",
     likes: ["u1", "u3"],
     createdAt: now - 1.5 * h,
@@ -202,7 +202,7 @@ export const SEED_POSTS = [
   },
   {
     id: "p4",
-    authorId: "u1",
+    authorId: "u3",
     topic: "Technology",
     body: "Helix collects two very different kinds of data and treats them as one. Functional data runs the shift and should be deleted. Training data stays and should require real consent. Today both flow through the same pipeline, with no legal or technical separation.",
     media: [
@@ -273,7 +273,7 @@ export const SEED_POSTS = [
   },
   {
     id: "p9",
-    authorId: "u1",
+    authorId: "u2",
     topic: "Legal",
     body: "Product-liability law was built for broken hardware. Data-protection law was built for online services. A humanoid robot that profiles workers can fit neatly between the two. That's not a bug. It's a structural blind spot.",
     media: [{ type: "embed", platform: "youtube", videoId: "Nc7hnPpbhyI" }],
@@ -314,7 +314,7 @@ export const SEED_POSTS = [
   // ── PRIVACY ───────────────────────────────────────────────────────────────
   {
     id: "p12",
-    authorId: "u4",
+    authorId: "u6",
     topic: "Privacy",
     body: "Being watched by a fixed camera is one thing. Being watched by something that turns to follow you is something else.\n\nCalo names three harms: surveillance, increased access, social meaning. All three show up the moment Helix shares a floor with workers.",
     media: [
@@ -329,7 +329,7 @@ export const SEED_POSTS = [
   },
   {
     id: "p13",
-    authorId: "u4",
+    authorId: "u6",
     topic: "Privacy",
     body: "The \"privacy paradox\" blames people for not protecting themselves.\n\nBut warehouse workers never chose to share space with Helix. They just showed up for a shift. When the alternative to surveillance is unemployment, there is no paradox. Only power.",
     media: [{ type: "image", url: "/Blog/images/p14.png", alt: "Lone worker watched by a surveillance light in a warehouse" }],
@@ -342,7 +342,7 @@ export const SEED_POSTS = [
   },
   {
     id: "p14",
-    authorId: "u1",
+    authorId: "u6",
     topic: "Privacy",
     body: "A CCTV camera produces footage. Helix produces a behavioral profile.\n\nThe same hour near the robot turns into a gait signature, posture history, conversation patterns, and reaction-time data. Footage you can subpoena. A profile travels into model weights and becomes inseparable from everything else the system has learned.\n\nFormat is the privacy problem, not just the lens.",
     media: [{ type: "image", url: "/Blog/images/p16.png", alt: "Humanoid robot facing a human worker in a corridor" }],
@@ -368,7 +368,7 @@ export const SEED_POSTS = [
   },
   {
     id: "p16",
-    authorId: "u4",
+    authorId: "u6",
     topic: "Privacy",
     body: "The panopticon worked because people might be watched. With Helix on the floor, workers know they are watched: every shift, every conversation within sensor range. The harm is already there in the behavior they quietly change to accommodate the robot.",
     media: [{ type: "diagram", component: "PrivacySlides" }],
@@ -396,7 +396,7 @@ export const SEED_POSTS = [
   },
   {
     id: "p18",
-    authorId: "u1",
+    authorId: "u4",
     topic: "Ethics",
     body: "Our consent tools were built for clicking \"agree\" on a screen. Humanoid robots learn from your behavior in real time, keep running after you leave, and live in spaces you can't easily exit. There is no \"close tab\" in the physical world.",
     media: [{ type: "embed", platform: "youtube", videoId: "DH8wCgwL_1U" }],
@@ -409,7 +409,7 @@ export const SEED_POSTS = [
   },
   {
     id: "p19",
-    authorId: "u3",
+    authorId: "u4",
     topic: "Ethics",
     body: "Working next to Helix means doing two jobs at once.\n\nYou move boxes for your shift, and at the same time you refine Figure AI's next model. Every recovery from an error, every edge case you handle, every subtle adjustment to a strange grasp ends up in the training set.\n\nOne paycheck for the labor. Nothing for the R&D.",
     media: [{ type: "image", url: "/Blog/images/p11.png", alt: "Warehouse workers operating alongside autonomous mobile robots" }],
@@ -422,7 +422,7 @@ export const SEED_POSTS = [
   },
   {
     id: "p20",
-    authorId: "u2",
+    authorId: "u4",
     topic: "Ethics",
     body: "Humanoid robots don't just see you, they study you. The same sensor stream that lets Helix hand you a package can infer mood from your face, health from your gait, and social ties from who stands near whom. That is behavioral profiling, not just robotics telemetry.",
     media: [{ type: "image", url: "/Blog/images/p10.png", alt: "Human body wrapped in sensor data streams showing inferred emotional and health markers" }],
@@ -465,7 +465,7 @@ export const SEED_POSTS = [
   },
   {
     id: "p23",
-    authorId: "u2",
+    authorId: "u1",
     topic: "Strategy",
     body: "GDPR wins not because it's pure, but because the EU market is too big to ignore. Build Helix to EU standards and most other jurisdictions become easier by default. Compliance becomes the cheapest business strategy.",
     media: [{ type: "diagram", component: "RegulationSlides" }],
@@ -491,7 +491,7 @@ export const SEED_POSTS = [
   },
   {
     id: "p25",
-    authorId: "u3",
+    authorId: "u1",
     topic: "Strategy",
     body: "Fixing the functional/training blur is mostly a definitional problem.\n\nA workable regulation needs three lines:\n\n1. Functional data, real-time control. Delete on use.\n2. Training data, model improvement. Explicit consent, retention cap, audit log.\n3. A designated certifier responsible for confirming the line is honored.\n\nWithout those three lines, every other privacy rule is enforceable on paper and unenforceable in practice.",
     media: [{ type: "diagram", component: "DataFlow" }],
