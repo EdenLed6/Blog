@@ -161,7 +161,7 @@ export const SEED_POSTS = [
     id: "p1",
     authorId: "u5",
     topic: "Technology",
-    body: "Most people have no idea what Helix 02 is actually doing when it's standing next to them. The technical papers exist, but they're written for engineers.\n\nHelix's loop is simple: sensors build a live 3D map. The model compresses vision, audio, and body data into one representation. The same system decides how to move and what is worth learning from. The \"experience\" of working next to Helix is also the training set for the next version.\n\n#HelixWatch",
+    body: "Most people have no idea what Helix 02 is actually doing when it's standing next to them.\n\nThe quiet part: every ordinary movement on a shift is a labeled training example. A worker corrects a grasp, the model learns the correction. A worker steps around the robot, the model learns the path. A worker recovers from a mistake, the model learns the recovery.\n\nRoutine warehouse work is the curriculum.\n\n#HelixWatch",
     media: [
       { type: "image", url: "/Blog/images/p13.png", alt: "Humanoid robot standing next to a human in a corridor" },
     ],
