@@ -3,7 +3,7 @@ import { SEED_USERS } from "../data/users.js";
 import { SEED_POSTS, SEED_REPLIES } from "../data/posts.js";
 import { generateId } from "../utils/helpers.js";
 
-const STORAGE_KEY = "helixblog_state_v16";
+const STORAGE_KEY = "helixblog_state_v17";
 
 function buildSeedState() {
   const userMap = {};

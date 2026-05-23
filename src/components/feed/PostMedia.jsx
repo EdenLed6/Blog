@@ -11,6 +11,8 @@ const DIAGRAMS = {
   LegalSlides: lazy(() => import("../diagrams/LegalSlides.jsx")),
   PrivacySlides: lazy(() => import("../diagrams/PrivacySlides.jsx")),
   RegulationSlides: lazy(() => import("../diagrams/RegulationSlides.jsx")),
+  PrivacyGapMatrix: lazy(() => import("../diagrams/PrivacyGapMatrix.jsx")),
+  LegalGapVisual: lazy(() => import("../diagrams/LegalGapVisual.jsx")),
 };
 
 export default function PostMedia({ media }) {

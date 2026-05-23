@@ -310,6 +310,19 @@ export const SEED_POSTS = [
     replyIds: ["r5", "r6"],
     createdAt: now - 3 * d,
   },
+  {
+    id: "p26",
+    authorId: "u2",
+    topic: "Legal",
+    body: "Figure AI hides its robots behind website legal terms. They are legally treating a human body like website analytics.",
+    media: [{ type: "diagram", component: "LegalGapVisual" }],
+    tags: [],
+    likes: ["u1", "u3", "u4", "u6"],
+    reposts: ["u1", "u4", "u6"],
+    bookmarks: ["u1", "u4", "u6"],
+    replyIds: [],
+    createdAt: now - 45 * m,
+  },
 
   // ── PRIVACY ───────────────────────────────────────────────────────────────
   {
@@ -357,8 +370,8 @@ export const SEED_POSTS = [
     id: "p15",
     authorId: "u6",
     topic: "Privacy",
-    body: "We scanned Figure AI's public docs for worker safeguards: on-device processing, anonymization, audit trails, consent logs, retention limits, opt-out. We didn't find a single concrete commitment.",
-    media: [{ type: "image", url: "/Blog/images/p15.png", alt: "Digital security shield with privacy checklist" }],
+    body: "We scanned Figure AI privacy docs for worker safeguards. Zero concrete commitments.\n\nWorse? Their policy is a copy-pasted SaaS boilerplate focused on \"cookies\" and \"browser history.\"\n\nHelix 02 processes full body spatial telemetry. The legal paperwork treats it like a website.",
+    media: [{ type: "diagram", component: "PrivacyGapMatrix" }],
     tags: ["shirschipper"],
     likes: ["u1", "u2", "u3", "u4"],
     reposts: ["u1", "u2", "u3"],
