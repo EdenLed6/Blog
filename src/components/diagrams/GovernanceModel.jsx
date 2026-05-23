@@ -1,74 +1,74 @@
-// 4-Tier Hybrid Governance Model
+// 4-Tier Hybrid Governance Model, mobile-first redesign
 export default function GovernanceModel() {
   const tiers = [
     {
-      tier: "Tier 1",
-      title: "Privacy by Design",
+      n: 1,
+      title: "Privacy by design",
       subtitle: "Architectural mandates",
-      desc: "On-device processing, auto-anonymization, no raw biometric egress by default",
-      color: "from-blue-900/40 to-blue-900/10",
-      border: "border-blue-700",
-      badge: "bg-blue-700",
-      icon: "🏗️",
+      desc: "On-device processing, auto-anonymization, and no raw biometric egress by default.",
       timing: "Pre-market",
+      border: "border-blue-700",
+      bg: "bg-blue-900/20",
+      badge: "bg-blue-700",
+      label: "text-blue-300",
     },
     {
-      tier: "Tier 2",
-      title: "Impact Assessment",
+      n: 2,
+      title: "Impact assessment",
       subtitle: "Per sector, pre-deployment",
-      desc: "DPIA required before deploying in warehouses, homes, hospitals, or schools",
-      color: "from-indigo-900/40 to-indigo-900/10",
-      border: "border-indigo-700",
-      badge: "bg-indigo-700",
-      icon: "📋",
+      desc: "A DPIA required before deploying in warehouses, homes, hospitals, or schools.",
       timing: "Pre-deployment",
+      border: "border-indigo-700",
+      bg: "bg-indigo-900/20",
+      badge: "bg-indigo-700",
+      label: "text-indigo-300",
     },
     {
-      tier: "Tier 3",
-      title: "Data Distinction",
+      n: 3,
+      title: "Data distinction",
       subtitle: "Functional vs training",
-      desc: "Legal separation of real-time operational data from retained training data",
-      color: "from-purple-900/40 to-purple-900/10",
-      border: "border-purple-700",
-      badge: "bg-purple-700",
-      icon: "⚖️",
+      desc: "Legal separation of real-time operational data from retained training data.",
       timing: "Ongoing",
+      border: "border-purple-700",
+      bg: "bg-purple-900/20",
+      badge: "bg-purple-700",
+      label: "text-purple-300",
     },
     {
-      tier: "Tier 4",
-      title: "International Convergence",
-      subtitle: "GDPR floor + US overlay",
-      desc: "GDPR/EU AI Act as global baseline; US sectoral rules applied on top",
-      color: "from-emerald-900/40 to-emerald-900/10",
-      border: "border-emerald-700",
-      badge: "bg-emerald-700",
-      icon: "🌐",
+      n: 4,
+      title: "International convergence",
+      subtitle: "GDPR floor, US overlay",
+      desc: "GDPR and the EU AI Act as the global baseline, with US sectoral rules layered on top.",
       timing: "Policy",
+      border: "border-emerald-700",
+      bg: "bg-emerald-900/20",
+      badge: "bg-emerald-700",
+      label: "text-emerald-300",
     },
   ];
 
   return (
-    <div className="rounded-xl overflow-hidden border border-border bg-card p-4 mt-3">
+    <div className="rounded-xl border border-border bg-card p-4 mt-3">
       <p className="text-xs text-slate-500 uppercase tracking-wide font-medium mb-4">
-        Proposed Hybrid Governance Model, Group 8
+        Proposed hybrid governance model, Group 8
       </p>
-      <div className="space-y-2">
+      <div className="space-y-3">
         {tiers.map((t) => (
-          <div key={t.tier} className={`rounded-lg border ${t.border} bg-gradient-to-r ${t.color} p-3`}>
-            <div className="flex items-start gap-3">
-              <div className={`w-14 flex-shrink-0 ${t.badge} rounded-md px-1.5 py-0.5 text-center`}>
-                <p className="text-xs text-white/70 font-medium">{t.tier}</p>
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-sm">{t.icon}</span>
-                  <span className="text-sm font-semibold text-white">{t.title}</span>
-                  <span className="text-xs text-slate-400">- {t.subtitle}</span>
-                  <span className="text-xs bg-white/10 text-slate-400 px-1.5 py-0.5 rounded-full ml-auto">{t.timing}</span>
-                </div>
-                <p className="text-sm text-slate-400 mt-1">{t.desc}</p>
-              </div>
+          <div key={t.n} className={`rounded-lg border ${t.border} ${t.bg} p-3`}>
+            <div className="flex items-center gap-2.5 mb-1">
+              <span className={`flex-shrink-0 ${t.badge} text-white text-xs font-bold px-2 py-1 rounded-md`}>
+                Tier {t.n}
+              </span>
+              <p className={`text-sm font-semibold ${t.label} flex-1 min-w-0 leading-tight`}>{t.title}</p>
+              <span className="hidden sm:inline-block text-xs bg-white/10 text-slate-400 px-2 py-0.5 rounded-full flex-shrink-0">
+                {t.timing}
+              </span>
             </div>
+            <p className="text-xs text-slate-400 mb-1.5">{t.subtitle}</p>
+            <p className="text-sm text-slate-300 leading-relaxed">{t.desc}</p>
+            <p className="text-[11px] text-slate-500 mt-2 sm:hidden">
+              <span className="font-medium">When:</span> {t.timing}
+            </p>
           </div>
         ))}
       </div>

@@ -27,17 +27,17 @@ const REFS = [
     url: "https://www.edps.europa.eu/data-protection/our-work/publications/other-documents/artificial-intelligence-robotics-privacy-and_en",
   },
   {
-    short: "Figure AI - Helix (2025)",
+    short: "Figure AI. Helix (2025)",
     full: "Figure AI. (2025, February 19). Helix: A vision-language-action model for generalist humanoid control.",
     url: "https://www.figure.ai/news/helix",
   },
   {
-    short: "Figure AI - Helix 02 (2026)",
+    short: "Figure AI. Helix 02 (2026)",
     full: "Figure AI. (2026, January 26). Introducing Helix 02: Full-body autonomy.",
     url: "https://www.figure.ai/news/helix-02",
   },
   {
-    short: "Figure AI - Privacy policy",
+    short: "Figure AI. Privacy policy",
     full: "Figure AI. (2026, January 20). Privacy policy.",
     url: "https://www.figure.ai/privacy-policy",
   },
