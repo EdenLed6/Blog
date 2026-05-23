@@ -75,16 +75,15 @@ export default function RightPanel() {
           <h3 className="text-sm font-semibold text-white">About this project</h3>
         </div>
         <p className="text-xs text-slate-300 leading-relaxed">
-          A semester-long research deep-dive into what humanoid robots like Figure AI's Helix mean for worker privacy, and whether the law is anywhere close to ready.
+          A semester of research on Figure AI's Helix and what humanoid robots mean for privacy, law, ethics, and governance.
         </p>
         <p className="text-xs text-slate-500 mt-2">
           By Eden, Orianne, Dan, Shir & Amir · Group 8
         </p>
-        <div className="mt-3 pt-3 border-t border-border space-y-1.5">
-          <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">Built on</p>
-          <p className="text-xs text-slate-400">Calo, R. (2010). Robots and Privacy.</p>
-          <p className="text-xs text-slate-400">Figure AI. (2026). Helix 02.</p>
-          <p className="text-xs text-slate-400">EU AI Act · GDPR Art. 25</p>
+        <div className="mt-3 pt-3 border-t border-border">
+          <p className="text-xs text-slate-400 leading-relaxed">
+            Built on academic privacy research, EU and US regulation, and primary documentation from humanoid robotics companies. Full citations on the About page.
+          </p>
         </div>
       </section>
     </aside>
